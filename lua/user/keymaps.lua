@@ -8,6 +8,7 @@ local keymap = vim.api.nvim_set_keymap
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 keymap("", "s", "<Nop>", opts)
+keymap("", ",", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -18,6 +19,97 @@ vim.g.maplocalleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+-- my Keymaps
+keymap("v", "Y", '"+y', opts)
+-- keymap("n", ";", ":", opts)
+-- vim.cmd [[nnoremap ; :]]
+-- vim.cmd [[vnoremap ; :]]
+-- vim.cmd [[nnoremap <space>; :]]
+
+-- select, delete, yank all document
+keymap("o", "al", ":<c-u>normal! ggVG<CR>", opts)
+keymap("n", "val", "ggVG", opts)
+-- save and quit
+keymap("n", "S", ":w<CR>", opts)
+keymap("n", "Q", ":q<CR>", opts)
+
+keymap("n", "/", "/\\v", {})
+keymap("v", "/", "/\\v", {})
+keymap("n", "?", "?\\v", {})
+keymap("v", "?", "?\\v", {})
+-- keymap("n", "\s", ":%s/\\v/g<Left><Left>", opts)
+-- keymap("v", "\s", ":s/\\v/g<Left><Left>", opts)
+vim.cmd[[nnoremap \s :%s/\v/g<left><left>]]
+vim.cmd[[vnoremap \s :s/\v/g<left><left>]]
+
+vim.cmd [[exec "nohlsearch"]]
+
+-- Open the init.lua file anytime you
+keymap("n", ",n", ":e $MYVIMRC<CR>", opts)
+-- Tab management
+keymap("n", ",tc", ":tabedit<CR>", opts)
+keymap("n", ",mt", ":-tabmove<CR>", opts)
+keymap("n", ",mT", ":+tabmove<CR>", opts)
+keymap("n", ",mf", ":0tabmove<CR>", opts)
+keymap("n", ",ml", ":$tabmove<CR>", opts)
+-- search adjacent duplicate words
+-- noremap sdw /\(\<\w\+\>\)\_s*\1
+vim.cmd[[noremap \dw /\v(<\w+>)\_s*<\1><cr>]]
+
+-- Opening a terminal window
+keymap("n", ",s/", ":set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>", opts)
+
+-- Press <leader><space> twice to jump to the next '' and edit it
+-- noremap <SPACE><SPACE> <Esc>/<++><CR>:nohlsearch<CR>c4l
+keymap("n", ",;", "<Esc>/<++><CR>:nohlsearch<CR>c4l", opts)
+keymap("i", ",;", "<Esc>/<++><CR>:nohlsearch<CR>c4l", opts)
+-- Toggle spelling check with sc
+keymap("n", ",sc", ":set spell!<CR>", opts)
+-- 定于光标之前的单词，然后为它查找第一个拼写建议
+-- find the first spell suggestion for it.
+keymap("n", "<A-S>", "ea<C-X>s", opts)
+keymap("i", "<A-S>", "<Esc>ea<C-X>s", opts)
+
+-- 手动设置文件类型
+vim.cmd[[nnoremap ,sf :set filetype=]]
+-- input telescope
+vim.cmd[[nnoremap ,ts :Telescope ]]
+
+-- Split windows management
+keymap("n", ",sl", "set splitright<CR>:vnew<cr>", opts)
+keymap("n", ",sh", "set nosplitright<CR>:vnew<cr>", opts)
+keymap("n", ",sj", "set splitbelow<CR>:new<cr>", opts)
+keymap("n", ",sk", "set nosplitbelow<CR>:new<cr>", opts)
+-- exchange tab
+keymap("n", ",sV", "<C-W>t<C-w>H<C-W>l", opts)
+keymap("n", ",sH", "<C-W>t<C-w>K<C-W>j", opts)
+-- Rotate screens
+keymap("n", ",srh", "<C-W>b<C-w>K", opts)
+keymap("n", ",srv", "<C-W>b<C-w>H", opts)
+
+-- command line mode cursor movement
+-- keymap("c", "<C-A>", "<Home>", opts)
+-- keymap("c", "<C-E>", "<END>", opts)
+-- keymap("c", "<C-P>", "<UP>", opts)
+-- keymap("c", "<C-N>", "<Down>", opts)
+-- keymap("c", "<C-H>", "<Left>", opts)
+-- keymap("c", "<C-L>", "<Right>", opts)
+-- keymap("c", "<M-H>", "<S-Left>", opts)
+-- keymap("c", "<M-L>", "<S-Right>", opts)
+vim.cmd [[cnoremap <C-A> <Home>]]
+vim.cmd [[cnoremap <C-E> <End>]]
+vim.cmd [[cnoremap <C-P> <Up>]]
+vim.cmd [[cnoremap <C-N> <Down>]]
+vim.cmd [[cnoremap <C-H> <Left>]]
+vim.cmd [[cnoremap <C-L> <Right>]]
+vim.cmd [[cnoremap <M-H> <S-Left>]]
+vim.cmd [[cnoremap <M-L> <S-Right>]]
+
+keymap("i", "<C-K>", "<UP>", opts)
+keymap("i", "<C-J>", "<Down>", opts)
+keymap("i", "<C-B>", "<Left>", opts)
+keymap("i", "<C-L>", "<Right>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -50,8 +142,8 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "<A-j>", ":move .+1<CR>==", opts)
+keymap("v", "<A-k>", ":move .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
@@ -71,8 +163,8 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- Custom
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<TAB>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
-keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
+-- keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
+-- keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
 keymap("n", "<F3>", ":e .<cr>", opts)
 keymap("n", "<F4>", "<cmd>Telescope resume<cr>", opts)
 keymap("n", "<F5>", "<cmd>Telescope commands<CR>", opts)
@@ -94,7 +186,7 @@ keymap(
   opts
 )
 keymap("n", "<C-t>", "<cmd>lua vim.lsp.buf.document_symbol()<cr>", opts)
-keymap("n", "<C-s>", "<cmd>vsplit<cr>", opts)
+-- keymap("n", "<C-s>", "<cmd>vsplit<cr>", opts)
 keymap("n", "<C-z>", "<cmd>ZenMode<cr>", opts)
 keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 -- keymap("n", "<C-\\>", "<cmd>vsplit<cr>", opts)

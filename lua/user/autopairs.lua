@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 npairs.setup {
-  check_ts = true,
+  check_ts = true,    -- ts stand for tree-sitter
   ts_config = {
     lua = { "string", "source" },
     javascript = { "string", "template_string" },

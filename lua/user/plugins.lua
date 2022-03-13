@@ -50,7 +50,7 @@ return packer.startup(function(use)
   use { "kyazdani42/nvim-tree.lua", commit = "f183c7f31197ae499c3420341fb8b275636a49b8" }
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
+  use "nvim-lualine/lualine.nvim"       -- status
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
@@ -89,12 +89,17 @@ return packer.startup(function(use)
     ft = "markdown",
   }
 
+  use "machakann/vim-highlightedyank"
+
   -- Colorschemes
-  use "folke/tokyonight.nvim"
+  -- use "folke/tokyonight.nvim"
   use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
   use "rose-pine/neovim"
   use "rebelot/kanagawa.nvim"
+  -- use "ajmwagar/vim-deus"         -- my favorite colorsche
+  use "theniceboy/nvim-deus"
+  use "morhetz/gruvbox"
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp", commit = "d93104244c3834fbd8f3dd01da9729920e0b5fe7" } -- The completion plugin

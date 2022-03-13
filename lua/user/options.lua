@@ -92,3 +92,4 @@ vim.cmd [[
   " open file where you leave the file
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 ]]
+
