@@ -5,10 +5,6 @@ end
 hop.setup()
 -- vim.api.nvim_set_keymap("", "s", ":HopChar2<cr>", { silent = true })
 -- vim.api.nvim_set_keymap("", "S", ":HopWord<cr>", { silent = true })
--- vim.api.nvim_set_keymap("n", ",j2", ":HopChar2<cr>", { silent = true })
-vim.api.nvim_set_keymap("n", ",w", ":HopWord<cr>", { silent = true })
-vim.api.nvim_set_keymap("n", ",p", ":HopPattern<cr>", {})
-vim.api.nvim_set_keymap("n", ",l", ":HopLine<cr>", { silent = true })
 
 -- plugin recommended
 vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})

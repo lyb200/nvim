@@ -59,7 +59,7 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
-  use "phaazon/hop.nvim"
+  use "phaazon/hop.nvim"                   -- anyjump
   use "andymass/vim-matchup"
   use "nacro90/numb.nvim"
   use "monaqa/dial.nvim"
@@ -72,8 +72,8 @@ return packer.startup(function(use)
   use "ThePrimeagen/harpoon"
   use "MattesGroeger/vim-bookmarks"
   use "lunarvim/vim-solidity"
-  --use "blackCauldron7/surround.nvim"
-  use "ur4ltz/surround.nvim"
+  use "tpope/vim-surround"
+  -- use "ur4ltz/surround.nvim"
   use "tpope/vim-repeat"
   use "Shatur/neovim-session-manager"
   use "rcarriga/nvim-notify"
@@ -97,8 +97,8 @@ return packer.startup(function(use)
   use "lunarvim/darkplus.nvim"
   use "rose-pine/neovim"
   use "rebelot/kanagawa.nvim"
-  -- use "ajmwagar/vim-deus"         -- my favorite colorsche
-  use "theniceboy/nvim-deus"
+  use "ajmwagar/vim-deus"         -- my favorite colorsche
+  -- use "theniceboy/nvim-deus"
   use "morhetz/gruvbox"
 
   -- cmp plugins

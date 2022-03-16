@@ -1,5 +1,5 @@
 local options = {
-  backup = false,                          -- creates a backup file
+  backup = true,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
   cmdheight = 1,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
@@ -50,14 +50,16 @@ local options = {
   autochdir = true,                        -- can change directory
   shiftround = true,                       -- round indent to multiple of 'shiftwidth'
   list = true,                             -- show tab and tailable
+  -- listchars = {'tab:\|\ ','trail:▫'}
   history = 1000,                          -- keep 1000 items in the history
   ruler = true,
   showcmd = true,
-  timeout = false,
   ttimeoutlen = 0,
   foldlevel = 99,
   foldenable = true,
-
+  wildmode = {'list:longest', 'full'},
+  wildmenu = true,                         -- show the possible matches just the above command line
+  inccommand = 'split',                    -- shows the effects of :substitute, :smagic, and :snomagic as you type
 }
 
 vim.opt.shortmess:append "c"
@@ -74,6 +76,7 @@ vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 vim.cmd [[set listchars=tab:\|\ ,trail:▫]]
 vim.cmd [[set diffopt+=vertical]]          -- show diffs side by side
 vim.cmd [[let &t_CO=256]]
+vim.cmd [[filetype plugin indent on]]
 
 vim.cmd [[
   if has('linebreak')
@@ -93,3 +96,33 @@ vim.cmd [[
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 ]]
 
+vim.cmd[[
+  if has('win32')
+    set backupdir=$HOME/AppData/Local/nvim-data/backup
+  else
+    set backupdir=$HOME/tmp/backup
+  endif
+
+  if has('mksession')
+    if has('win32')
+      set viewdir=$HOME/AppData/Local/nvim-data/view
+    else
+      set viewdir=$HOME/tmp/view
+    endif
+    set viewoptions=cursor,folds,slash,unix
+  endif
+
+  if has('persistent_undo')
+    set undofile
+    if has('unix')
+      set undodir=$HOME/tmp/undo
+    else
+      " set undodir=$HOME/AppData/Local/nvim/undo,.
+      set undodir=$HOME/AppData/Local/nvim-data/undo
+    endif
+  endif
+]]
+-- delete last trailinDTreeToggle
+vim.cmd[[
+  autocmd BufWritePre * :%s/\s\+$//e
+]]

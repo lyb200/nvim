@@ -14,9 +14,9 @@ local setup = {
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     presets = {
-      operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = false, -- adds help for motions
-      text_objects = false, -- help for text objects triggered after entering an operator
+      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = true, -- adds help for motions
+      text_objects = true, -- help for text objects triggered after entering an operator
       windows = true, -- default bindings on <c-w>
       nav = true, -- misc bindings to work with windows
       z = true, -- bindings for folds, spelling and others prefixed with z
@@ -25,7 +25,7 @@ local setup = {
   },
   -- add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
-  -- operators = { gc = "Comments" },
+  operators = { gc = "Comments" },
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -87,6 +87,45 @@ local m_opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
+local s_opts = {
+  mode = "n", -- NORMAL mode
+  prefix = "s",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local s_mappings ={
+  c = { ':set spell!<CR>', 'spelling check'},
+  f = { ':set filetype=', 'filetype'},
+  l = { ':set splitright<CR>:vnew<CR>', 'vertical splitright'},
+  h = { ':set nosplitright<CR>:vnew<CR>', 'vertical splitleft'},
+  j = { ':set splitright<CR>:new<CR>', 'splitbelow'},
+  k = { ':set nosplitright<CR>:new<CR>', 'splittop'},
+  V = { '<C-W>t<C-w>H<C-W>l', 'to vertical'},
+  H = { '<C-W>t<C-w>K<C-W>j', 'to horizontal'},
+  o = { ':source %<CR>', 'source curfile'},
+  r = {
+    name = 'rotate',
+    h = { '<C-W>b<C-w>K', 'rotate up'},
+    v = { '<C-W>b<C-w>H', 'rotate down'},
+  },
+  s = { ':%s/\v/g<left><left>', 'substitute'},
+  g = { 'ea<C-x><C-s>', 'spell suggestion'},
+  w = { ':set wrap<CR>', 'wrap'},
+  W = { ':set nowrap<CR>', 'nowrap'},
+  t = {
+    name = 'tab',
+    c = { ':tabedit<CR>', 'new tab'},
+    p = { ':-tabmove<CR>', 'to prev'},
+    n = { ':+tabmove<CR>', 'to next'},
+    f = { ':0tabmove<CR>', 'to first'},
+    l = { ':$tabmove<CR>', 'to last'},
+  },
+  d = { '/\\v(<\\w+>)\\_s*<\\1><CR>', 'adjacent duplicate words'},
+}
+
 local m_mappings = {
   a = { "<cmd>BookmarkAnnotate<cr>", "Annotate" },
   c = { "<cmd>BookmarkClear<cr>", "Clear" },
@@ -141,7 +180,7 @@ local mappings = {
   },
 
   f = {
-    name = "Fin",
+    name = "Find",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     f = {
@@ -223,7 +262,7 @@ local mappings = {
     },
   },
 
-  s = {
+  --[[ s = {
     name = "Surround",
     ["."] = { "<cmd>lua require('surround').repeat_last()<cr>", "Repeat" },
     a = { "<cmd>lua require('surround').surround_add(true)<cr>", "Add" },
@@ -231,7 +270,7 @@ local mappings = {
     r = { "<cmd>lua require('surround').surround_replace()<cr>", "Replace" },
     q = { "<cmd>lua require('surround').toggle_quotes()<cr>", "Quotes" },
     b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Brackets" },
-  },
+  }, ]]
 
   S = {
     -- name = "Session",
@@ -269,6 +308,9 @@ local mappings = {
     h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
   },
+  -- Press to close the window below the current window
+  q = { '<C-w>j:q<CR', 'close window below'},
+  k = { 'K', 'keywordprg'},
 }
 
 local vopts = {
@@ -279,12 +321,93 @@ local vopts = {
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
+
 local vmappings = {
   ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
   s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 
+local s_vopts = {
+  mode = "v", -- VISUAL mode
+  prefix = "s",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local s_vmappings = {
+  s = { ':s/\v/g<left><left>', 'substitute'},
+}
+
+local s_iopts = {
+  mode = "i", -- VISUAL mode
+  prefix = "s",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local s_imappings = {
+  g = { '<Esc>ea<C-x><C-s>', 'spell suggestion'},
+}
+
+local c_opts = {           -- comma
+  mode = "n", -- VISUAL mode
+  prefix = ",",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local c_mappings = {
+  [';'] = { '<Esc>/<++><CR>:nohlsearch<CR>c4l', 'edit <++>' },
+  p = { '"+p', 'system copyboard' },
+  -- need install figlet
+  g = { ':r !figlet', 'get picture'},
+  w = { ':HopWord<cr>', 'jump word'},
+  s = { ':HopChar2<cr>', 'jump char2'},
+  l = { ':HopLine<cr>', 'jump line'},
+  P = { ':HopPattern<cr>', 'jump pattern'},
+}
+
+local c_vopts = {           -- comma
+  mode = "v", -- VISUAL mode
+  prefix = ",",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local c_vmappings = {
+  p = { '"+p', 'system copyboard' },
+}
+
+local c_iopts = {           -- comma
+  mode = "i", -- VISUAL mode
+  prefix = ",",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local c_imappings = {
+  [';'] = { '<Esc>/<++><CR>:nohlsearch<CR>c4l', 'edit <++>' },
+}
+
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
 which_key.register(m_mappings, m_opts)
+which_key.register(s_mappings, s_opts)
+which_key.register(s_vmappings, s_vopts)
+which_key.register(s_imappings, s_iopts)
+which_key.register(c_mappings, c_opts)
+which_key.register(c_imappings, c_iopts)
+which_key.register(c_vmappings, c_vopts)
+

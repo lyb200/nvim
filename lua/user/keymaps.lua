@@ -27,66 +27,40 @@ keymap("v", "Y", '"+y', opts)
 -- vim.cmd [[vnoremap ; :]]
 -- vim.cmd [[nnoremap <space>; :]]
 
+-- j, k  Store relative line number jumps in the jumplist
+-- if they exceed a threshold.
+keymap('n', 'k', "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", {noremap = true, expr = true})
+keymap('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {noremap = true, expr = true})
+
 -- select, delete, yank all document
 keymap("o", "al", ":<c-u>normal! ggVG<CR>", opts)
 keymap("n", "val", "ggVG", opts)
 -- save and quit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
+vim.cmd[[
+  cnoreabbrev Wq wq
+  cnoreabbrev WQ wq
+  cnoreabbrev W w
+  cnoreabbrev Q q
+]]
+
+-- Allow saving of files as sudo when I forgot to start vim using sudo.
+-- keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", opts)
+vim.cmd[[cnoremap <C-S> :<C-u>w !sudo tee > /dev/null %]]
 
 keymap("n", "/", "/\\v", {})
-keymap("v", "/", "/\\v", {})
+-- keymap("v", "/", "/\\v", {})
 keymap("n", "?", "?\\v", {})
-keymap("v", "?", "?\\v", {})
--- keymap("n", "\s", ":%s/\\v/g<Left><Left>", opts)
--- keymap("v", "\s", ":s/\\v/g<Left><Left>", opts)
-vim.cmd[[nnoremap \s :%s/\v/g<left><left>]]
-vim.cmd[[vnoremap \s :s/\v/g<left><left>]]
+-- keymap("v", "?", "?\\v", {})
+
+keymap('n', '&', ':&&<CR>', {noremap = true})
+keymap('x', '&', ':&&<CR>', {noremap = true})
 
 vim.cmd [[exec "nohlsearch"]]
 
--- Open the init.lua file anytime you
-keymap("n", ",n", ":e $MYVIMRC<CR>", opts)
--- Tab management
-keymap("n", ",tc", ":tabedit<CR>", opts)
-keymap("n", ",mt", ":-tabmove<CR>", opts)
-keymap("n", ",mT", ":+tabmove<CR>", opts)
-keymap("n", ",mf", ":0tabmove<CR>", opts)
-keymap("n", ",ml", ":$tabmove<CR>", opts)
--- search adjacent duplicate words
--- noremap sdw /\(\<\w\+\>\)\_s*\1
-vim.cmd[[noremap \dw /\v(<\w+>)\_s*<\1><cr>]]
-
 -- Opening a terminal window
-keymap("n", ",s/", ":set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>", opts)
-
--- Press <leader><space> twice to jump to the next '' and edit it
--- noremap <SPACE><SPACE> <Esc>/<++><CR>:nohlsearch<CR>c4l
-keymap("n", ",;", "<Esc>/<++><CR>:nohlsearch<CR>c4l", opts)
-keymap("i", ",;", "<Esc>/<++><CR>:nohlsearch<CR>c4l", opts)
--- Toggle spelling check with sc
-keymap("n", ",sc", ":set spell!<CR>", opts)
--- 定于光标之前的单词，然后为它查找第一个拼写建议
--- find the first spell suggestion for it.
-keymap("n", "<A-S>", "ea<C-X>s", opts)
-keymap("i", "<A-S>", "<Esc>ea<C-X>s", opts)
-
--- 手动设置文件类型
-vim.cmd[[nnoremap ,sf :set filetype=]]
--- input telescope
-vim.cmd[[nnoremap ,ts :Telescope ]]
-
--- Split windows management
-keymap("n", ",sl", "set splitright<CR>:vnew<cr>", opts)
-keymap("n", ",sh", "set nosplitright<CR>:vnew<cr>", opts)
-keymap("n", ",sj", "set splitbelow<CR>:new<cr>", opts)
-keymap("n", ",sk", "set nosplitbelow<CR>:new<cr>", opts)
--- exchange tab
-keymap("n", ",sV", "<C-W>t<C-w>H<C-W>l", opts)
-keymap("n", ",sH", "<C-W>t<C-w>K<C-W>j", opts)
--- Rotate screens
-keymap("n", ",srh", "<C-W>b<C-w>K", opts)
-keymap("n", ",srv", "<C-W>b<C-w>H", opts)
+-- keymap("n", ",s/", ":set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>", opts)
 
 -- command line mode cursor movement
 -- keymap("c", "<C-A>", "<Home>", opts)
