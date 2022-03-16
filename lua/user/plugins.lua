@@ -182,6 +182,13 @@ return packer.startup(function(use)
   use "rcarriga/nvim-dap-ui"
   use "Pocco81/DAPInstall.nvim"
 
+  -- Translating plugin for Vim/Neovim
+  use 'lyb200/vim-translator'
+  -- use 'voldikss/vim-translator'
+
+  -- A simple plugin for opening urls in browser
+  use 'lyb200/vim-open-url'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

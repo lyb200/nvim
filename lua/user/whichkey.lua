@@ -87,45 +87,6 @@ local m_opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local s_opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "s",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local s_mappings ={
-  c = { ':set spell!<CR>', 'spelling check'},
-  f = { ':set filetype=', 'filetype'},
-  l = { ':set splitright<CR>:vnew<CR>', 'vertical splitright'},
-  h = { ':set nosplitright<CR>:vnew<CR>', 'vertical splitleft'},
-  j = { ':set splitright<CR>:new<CR>', 'splitbelow'},
-  k = { ':set nosplitright<CR>:new<CR>', 'splittop'},
-  V = { '<C-W>t<C-w>H<C-W>l', 'to vertical'},
-  H = { '<C-W>t<C-w>K<C-W>j', 'to horizontal'},
-  o = { ':source %<CR>', 'source curfile'},
-  r = {
-    name = 'rotate',
-    h = { '<C-W>b<C-w>K', 'rotate up'},
-    v = { '<C-W>b<C-w>H', 'rotate down'},
-  },
-  s = { ':%s/\v/g<left><left>', 'substitute'},
-  g = { 'ea<C-x><C-s>', 'spell suggestion'},
-  w = { ':set wrap<CR>', 'wrap'},
-  W = { ':set nowrap<CR>', 'nowrap'},
-  t = {
-    name = 'tab',
-    c = { ':tabedit<CR>', 'new tab'},
-    p = { ':-tabmove<CR>', 'to prev'},
-    n = { ':+tabmove<CR>', 'to next'},
-    f = { ':0tabmove<CR>', 'to first'},
-    l = { ':$tabmove<CR>', 'to last'},
-  },
-  d = { '/\\v(<\\w+>)\\_s*<\\1><CR>', 'adjacent duplicate words'},
-}
-
 local m_mappings = {
   a = { "<cmd>BookmarkAnnotate<cr>", "Annotate" },
   c = { "<cmd>BookmarkClear<cr>", "Clear" },
@@ -327,6 +288,50 @@ local vmappings = {
   s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 
+local s_opts = {
+  mode = "n", -- NORMAL mode
+  prefix = "s",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local s_mappings ={
+  c = { ':set spell!<CR>', 'spelling check'},
+  f = { ':set filetype=', 'filetype'},
+  l = { ':set splitright<CR>:vnew<CR>', 'vertical splitright'},
+  h = { ':set nosplitright<CR>:vnew<CR>', 'vertical splitleft'},
+  j = { ':set splitright<CR>:new<CR>', 'splitbelow'},
+  k = { ':set nosplitright<CR>:new<CR>', 'splittop'},
+  V = { '<C-W>t<C-w>H<C-W>l', 'to vertical'},
+  H = { '<C-W>t<C-w>K<C-W>j', 'to horizontal'},
+  o = { ':source %<CR>', 'source curfile'},
+  r = {
+    name = 'rotate',
+    h = { '<C-W>b<C-w>K', 'rotate up'},
+    v = { '<C-W>b<C-w>H', 'rotate down'},
+  },
+  s = { ':%s/\v/g<left><left>', 'substitute'},
+  g = { 'ea<C-x><C-s>', 'spell suggestion'},
+  w = { ':set wrap<CR>', 'wrap'},
+  W = { ':set nowrap<CR>', 'nowrap'},
+  t = {
+    name = 'tab',
+    c = { ':tabedit<CR>', 'new tab'},
+    p = { ':-tabmove<CR>', 'to prev'},
+    n = { ':+tabmove<CR>', 'to next'},
+    f = { ':0tabmove<CR>', 'to first'},
+    l = { ':$tabmove<CR>', 'to last'},
+  },
+  d = { '/\\v(<\\w+>)\\_s*<\\1><CR>', 'adjacent duplicate words'},
+  b = { '<Plug>(open-url-search-baidu)', 'baidu search'},
+  m = { '<Plug>(open-url-search-bing)', 'bing search'},
+  B = { '<Plug>(open-url-browser)', 'open url'},
+  T = { '<Plug>(open-url-search-translate)', 'baidu translate'},
+  M = { '<Plug>(open-url-search-wikipedia)', 'wikipedia search'},
+}
+
 local s_vopts = {
   mode = "v", -- VISUAL mode
   prefix = "s",
@@ -340,7 +345,7 @@ local s_vmappings = {
   s = { ':s/\v/g<left><left>', 'substitute'},
 }
 
-local s_iopts = {
+--[[ local s_iopts = {
   mode = "i", -- VISUAL mode
   prefix = "s",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -351,13 +356,13 @@ local s_iopts = {
 
 local s_imappings = {
   g = { '<Esc>ea<C-x><C-s>', 'spell suggestion'},
-}
+} ]]
 
 local c_opts = {           -- comma
   mode = "n", -- VISUAL mode
   prefix = ",",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
+  silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
@@ -367,10 +372,18 @@ local c_mappings = {
   p = { '"+p', 'system copyboard' },
   -- need install figlet
   g = { ':r !figlet', 'get picture'},
-  w = { ':HopWord<cr>', 'jump word'},
-  s = { ':HopChar2<cr>', 'jump char2'},
-  l = { ':HopLine<cr>', 'jump line'},
+  f = { ":HopChar1<CR>", 'jump char1'},
+  w = { ':HopWord<CR>', 'jump word'},
+  s = { ':HopChar2<CR>', 'jump char2'},
+  l = { ':HopLine<CR>', 'jump line'},
   P = { ':HopPattern<cr>', 'jump pattern'},
+  t = {
+    name = 'Translate',
+    c = { '<Plug>Translate', 'in cmdline'},
+    w = { '<Plug>TranslateW', 'in window'},
+    r = { '<Plug>TranslateR', 'Replace with'},
+    x = { '<Plug>TranslateX', 'in clipboard'},
+  },
 }
 
 local c_vopts = {           -- comma
@@ -384,19 +397,40 @@ local c_vopts = {           -- comma
 
 local c_vmappings = {
   p = { '"+p', 'system copyboard' },
+  t = {
+    name = 'Translate',
+    c = { '<Plug>TranslateV', 'in cmdline'},
+    w = { '<Plug>TranslateWV', 'in window'},
+    r = { '<Plug>TranslateRV', 'Replace with'},
+  },
 }
 
 local c_iopts = {           -- comma
   mode = "i", -- VISUAL mode
   prefix = ",",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
+  silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
 
 local c_imappings = {
   [';'] = { '<Esc>/<++><CR>:nohlsearch<CR>c4l', 'edit <++>' },
+  w = { '<Esc>/ <++><CR>:nohlsearch<CR>c5l', 'edit  <++>' },
+  l = { '--------<CR>', 'line' },
+  n = { '---<CR><CR>', 'line' },
+  b = { '**** <++><Esc>2F*i', 'bold' },
+  s = { '~~~~ <++><Esc>2F~i', 'strike' },
+  i = { '** <++><Esc>F*i', 'italic' },
+  d = { '`` <++><Esc>F`i', 'line code' },
+  c = { '```<CR><++><CR>```<CR><CR><++><Esc>4kA', 'code block' },
+  m = { '- [ ]', 'mark' },
+  p = { '![](<++>) <++><Esc>F[a', 'picture' },
+  a = { '[](<++>) <++><Esc>F[a', 'link' },
+  ['1'] = { '#<Space><CR><++><Esc>kA', '1 heading' },
+  ['2'] = { '##<Space><CR><++><Esc>kA', '2 heading' },
+  ['3'] = { '###<Space><CR><++><Esc>kA', '3 heading' },
+  ['4'] = { '####<Space><CR><++><Esc>kA', '4 heading' },
 }
 
 
@@ -406,7 +440,7 @@ which_key.register(vmappings, vopts)
 which_key.register(m_mappings, m_opts)
 which_key.register(s_mappings, s_opts)
 which_key.register(s_vmappings, s_vopts)
-which_key.register(s_imappings, s_iopts)
+-- which_key.register(s_imappings, s_iopts)
 which_key.register(c_mappings, c_opts)
 which_key.register(c_imappings, c_iopts)
 which_key.register(c_vmappings, c_vopts)

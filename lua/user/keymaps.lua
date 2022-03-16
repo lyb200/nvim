@@ -59,9 +59,6 @@ keymap('x', '&', ':&&<CR>', {noremap = true})
 
 vim.cmd [[exec "nohlsearch"]]
 
--- Opening a terminal window
--- keymap("n", ",s/", ":set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>", opts)
-
 -- command line mode cursor movement
 -- keymap("c", "<C-A>", "<Home>", opts)
 -- keymap("c", "<C-E>", "<END>", opts)
@@ -129,10 +126,10 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 -- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Custom
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
