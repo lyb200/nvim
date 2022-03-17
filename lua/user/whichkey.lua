@@ -270,8 +270,14 @@ local mappings = {
     p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
   },
   -- Press to close the window below the current window
-  q = { '<C-w>j:q<CR', 'close window below'},
-  k = { 'K', 'keywordprg'},
+  q = { "<C-w>j:q<CR", "close window below" },
+  k = { "K", "keywordprg" },
+  m = {
+    name = "Markdown",
+    p = { ":MarkdownPreview", "MarkdownPreview" },
+    t = { ":MarkdownPreviewToggle", "MarkdownPreviewToggle" },
+    s = { ":MarkdownPreviewStop", "MarkdownPreviewStop" },
+  },
 }
 
 local vopts = {
@@ -297,39 +303,46 @@ local s_opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local s_mappings ={
-  c = { ':set spell!<CR>', 'spelling check'},
-  f = { ':set filetype=', 'filetype'},
-  l = { ':set splitright<CR>:vnew<CR>', 'vertical splitright'},
-  h = { ':set nosplitright<CR>:vnew<CR>', 'vertical splitleft'},
-  j = { ':set splitright<CR>:new<CR>', 'splitbelow'},
-  k = { ':set nosplitright<CR>:new<CR>', 'splittop'},
-  V = { '<C-W>t<C-w>H<C-W>l', 'to vertical'},
-  H = { '<C-W>t<C-w>K<C-W>j', 'to horizontal'},
-  o = { ':source %<CR>', 'source curfile'},
+local s_mappings = {
+  c = { ":set spell!<CR>", "spelling check" },
+  f = { ":set filetype=", "filetype" },
+  l = { ":set splitright<CR>:vnew<CR>", "vertical splitright" },
+  h = { ":set nosplitright<CR>:vnew<CR>", "vertical splitleft" },
+  j = { ":set splitright<CR>:new<CR>", "splitbelow" },
+  k = { ":set nosplitright<CR>:new<CR>", "splittop" },
+  V = { "<C-W>t<C-w>H<C-W>l", "to vertical" },
+  H = { "<C-W>t<C-w>K<C-W>j", "to horizontal" },
+  o = { ":source %<CR>", "source curfile" },
   r = {
-    name = 'rotate',
-    h = { '<C-W>b<C-w>K', 'rotate up'},
-    v = { '<C-W>b<C-w>H', 'rotate down'},
+    name = "rotate",
+    h = { "<C-W>b<C-w>K", "rotate up" },
+    v = { "<C-W>b<C-w>H", "rotate down" },
   },
-  s = { ':%s/\v/g<left><left>', 'substitute'},
-  g = { 'ea<C-x><C-s>', 'spell suggestion'},
-  w = { ':set wrap<CR>', 'wrap'},
-  W = { ':set nowrap<CR>', 'nowrap'},
+  s = { ":%s/\v/g<left><left>", "substitute" },
+  S = {
+    name = "Session",
+    s = { "<cmd>SaveSession<cr>", "Save" },
+    l = { "<cmd>LoadLastSession!<cr>", "Load Last" },
+    d = { "<cmd>LoadCurrentDirSession!<cr>", "Load Last Dir" },
+    f = { "<cmd>Telescope sessions save_current=false<cr>", "Find Session" },
+  },
+  g = { "ea<C-x><C-s>", "spell suggestion" },
+  w = { ":set wrap<CR>", "wrap" },
+  W = { ":set nowrap<CR>", "nowrap" },
   t = {
-    name = 'tab',
-    c = { ':tabedit<CR>', 'new tab'},
-    p = { ':-tabmove<CR>', 'to prev'},
-    n = { ':+tabmove<CR>', 'to next'},
-    f = { ':0tabmove<CR>', 'to first'},
-    l = { ':$tabmove<CR>', 'to last'},
+    name = "tab",
+    c = { ":tabedit<CR>", "new tab" },
+    p = { ":-tabmove<CR>", "to prev" },
+    n = { ":+tabmove<CR>", "to next" },
+    f = { ":0tabmove<CR>", "to first" },
+    l = { ":$tabmove<CR>", "to last" },
   },
-  d = { '/\\v(<\\w+>)\\_s*<\\1><CR>', 'adjacent duplicate words'},
-  b = { '<Plug>(open-url-search-baidu)', 'baidu search'},
-  m = { '<Plug>(open-url-search-bing)', 'bing search'},
-  B = { '<Plug>(open-url-browser)', 'open url'},
-  T = { '<Plug>(open-url-search-translate)', 'baidu translate'},
-  M = { '<Plug>(open-url-search-wikipedia)', 'wikipedia search'},
+  d = { "/\\v(<\\w+>)\\_s*<\\1><CR>", "adjacent duplicate words" },
+  b = { "<Plug>(open-url-search-baidu)", "baidu search" },
+  m = { "<Plug>(open-url-search-bing)", "bing search" },
+  B = { "<Plug>(open-url-browser)", "open url" },
+  T = { "<Plug>(open-url-search-translate)", "baidu translate" },
+  M = { "<Plug>(open-url-search-wikipedia)", "wikipedia search" },
 }
 
 local s_vopts = {
@@ -342,7 +355,7 @@ local s_vopts = {
 }
 
 local s_vmappings = {
-  s = { ':s/\v/g<left><left>', 'substitute'},
+  s = { ":s/\v/g<left><left>", "substitute" },
 }
 
 --[[ local s_iopts = {
@@ -358,7 +371,7 @@ local s_imappings = {
   g = { '<Esc>ea<C-x><C-s>', 'spell suggestion'},
 } ]]
 
-local c_opts = {           -- comma
+local c_opts = { -- comma
   mode = "n", -- VISUAL mode
   prefix = ",",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -368,25 +381,31 @@ local c_opts = {           -- comma
 }
 
 local c_mappings = {
-  [';'] = { '<Esc>/<++><CR>:nohlsearch<CR>c4l', 'edit <++>' },
-  p = { '"+p', 'system copyboard' },
+  [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
+  p = { '"+p', "system copyboard" },
   -- need install figlet
-  g = { ':r !figlet', 'get picture'},
-  f = { ":HopChar1<CR>", 'jump char1'},
-  w = { ':HopWord<CR>', 'jump word'},
-  s = { ':HopChar2<CR>', 'jump char2'},
-  l = { ':HopLine<CR>', 'jump line'},
-  P = { ':HopPattern<cr>', 'jump pattern'},
+  g = { ":r !figlet", "get picture" },
+  f = { ":HopChar1<CR>", "jump char1" },
+  w = { ":HopWord<CR>", "jump word" },
+  s = { ":HopChar2<CR>", "jump char2" },
+  l = { ":HopLine<CR>", "jump line" },
+  P = { ":HopPattern<cr>", "jump pattern" },
   t = {
-    name = 'Translate',
-    c = { '<Plug>Translate', 'in cmdline'},
-    w = { '<Plug>TranslateW', 'in window'},
-    r = { '<Plug>TranslateR', 'Replace with'},
-    x = { '<Plug>TranslateX', 'in clipboard'},
+    name = "Translate",
+    c = { "<Plug>Translate", "in cmdline" },
+    w = { "<Plug>TranslateW", "in window" },
+    r = { "<Plug>TranslateR", "Replace with" },
+    x = { "<Plug>TranslateX", "in clipboard" },
+  },
+  m = {
+    name = "Markdown",
+    t = { "<cmd>TableModeToggle<CR>", "tab mode toggle" },
+    r = { "<cmd>RenumberList<CR>", "RenumberList" },
+    x = { "<cmd>ToggleCheckbox<CR>", "ToggleCheckbox" },
   },
 }
 
-local c_vopts = {           -- comma
+local c_vopts = { -- comma
   mode = "v", -- VISUAL mode
   prefix = ",",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -396,16 +415,20 @@ local c_vopts = {           -- comma
 }
 
 local c_vmappings = {
-  p = { '"+p', 'system copyboard' },
+  p = { '"+p', "system copyboard" },
   t = {
-    name = 'Translate',
-    c = { '<Plug>TranslateV', 'in cmdline'},
-    w = { '<Plug>TranslateWV', 'in window'},
-    r = { '<Plug>TranslateRV', 'Replace with'},
+    name = "Translate",
+    c = { "<Plug>TranslateV", "in cmdline" },
+    w = { "<Plug>TranslateWV", "in window" },
+    r = { "<Plug>TranslateRV", "Replace with" },
+  },
+  m = {
+    name = "Markdown",
+    r = { "<cmd>RenumberSelection<CR>", "RenumberSelection" },
   },
 }
 
-local c_iopts = {           -- comma
+local c_iopts = { -- comma
   mode = "i", -- VISUAL mode
   prefix = ",",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -415,24 +438,23 @@ local c_iopts = {           -- comma
 }
 
 local c_imappings = {
-  [';'] = { '<Esc>/<++><CR>:nohlsearch<CR>c4l', 'edit <++>' },
-  w = { '<Esc>/ <++><CR>:nohlsearch<CR>c5l', 'edit  <++>' },
-  l = { '--------<CR>', 'line' },
-  n = { '---<CR><CR>', 'line' },
-  b = { '**** <++><Esc>2F*i', 'bold' },
-  s = { '~~~~ <++><Esc>2F~i', 'strike' },
-  i = { '** <++><Esc>F*i', 'italic' },
-  d = { '`` <++><Esc>F`i', 'line code' },
-  c = { '```<CR><++><CR>```<CR><CR><++><Esc>4kA', 'code block' },
-  m = { '- [ ]', 'mark' },
-  p = { '![](<++>) <++><Esc>F[a', 'picture' },
-  a = { '[](<++>) <++><Esc>F[a', 'link' },
-  ['1'] = { '#<Space><CR><++><Esc>kA', '1 heading' },
-  ['2'] = { '##<Space><CR><++><Esc>kA', '2 heading' },
-  ['3'] = { '###<Space><CR><++><Esc>kA', '3 heading' },
-  ['4'] = { '####<Space><CR><++><Esc>kA', '4 heading' },
+  [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
+  w = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "edit  <++>" },
+  l = { "--------<CR>", "line" },
+  n = { "---<CR><CR>", "line" },
+  b = { "**** <++><Esc>2F*i", "bold" },
+  s = { "~~~~ <++><Esc>2F~i", "strike" },
+  i = { "** <++><Esc>F*i", "italic" },
+  d = { "`` <++><Esc>F`i", "line code" },
+  c = { "```<CR><++><CR>```<CR><CR><++><Esc>4kA", "code block" },
+  m = { "- [ ]", "mark" },
+  p = { "![](<++>) <++><Esc>F[a", "picture" },
+  a = { "[](<++>) <++><Esc>F[a", "link" },
+  ["1"] = { "#<Space><CR><++><Esc>kA", "1 heading" },
+  ["2"] = { "##<Space><CR><++><Esc>kA", "2 heading" },
+  ["3"] = { "###<Space><CR><++><Esc>kA", "3 heading" },
+  ["4"] = { "####<Space><CR><++><Esc>kA", "4 heading" },
 }
-
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
@@ -444,4 +466,3 @@ which_key.register(s_vmappings, s_vopts)
 which_key.register(c_mappings, c_opts)
 which_key.register(c_imappings, c_iopts)
 which_key.register(c_vmappings, c_vopts)
-

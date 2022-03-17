@@ -22,15 +22,15 @@ vim.g.maplocalleader = " "
 
 -- my Keymaps
 keymap("v", "Y", '"+y', opts)
--- keymap("n", ";", ":", opts)
--- vim.cmd [[nnoremap ; :]]
--- vim.cmd [[vnoremap ; :]]
+keymap("n", ";", ":", { noremap = true, silent = false })
+keymap("v", ";", ":", { noremap = true, silent = false })
+keymap("n", "<space>;", ";", { noremap = true, silent = false })
 -- vim.cmd [[nnoremap <space>; :]]
 
 -- j, k  Store relative line number jumps in the jumplist
 -- if they exceed a threshold.
-keymap('n', 'k', "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", {noremap = true, expr = true})
-keymap('n', 'j', "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", {noremap = true, expr = true})
+keymap("n", "k", "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", { noremap = true, expr = true })
+keymap("n", "j", "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", { noremap = true, expr = true })
 
 -- select, delete, yank all document
 keymap("o", "al", ":<c-u>normal! ggVG<CR>", opts)
@@ -38,7 +38,7 @@ keymap("n", "val", "ggVG", opts)
 -- save and quit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
-vim.cmd[[
+vim.cmd [[
   cnoreabbrev Wq wq
   cnoreabbrev WQ wq
   cnoreabbrev W w
@@ -47,40 +47,34 @@ vim.cmd[[
 
 -- Allow saving of files as sudo when I forgot to start vim using sudo.
 -- keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", opts)
-vim.cmd[[cnoremap <C-S> :<C-u>w !sudo tee > /dev/null %]]
+vim.cmd [[cnoremap <C-S> :<C-u>w !sudo tee > /dev/null %]]
 
 keymap("n", "/", "/\\v", {})
 -- keymap("v", "/", "/\\v", {})
 keymap("n", "?", "?\\v", {})
 -- keymap("v", "?", "?\\v", {})
 
-keymap('n', '&', ':&&<CR>', {noremap = true})
-keymap('x', '&', ':&&<CR>', {noremap = true})
+keymap("n", "&", ":&&<CR>", { noremap = true })
+keymap("x", "&", ":&&<CR>", { noremap = true })
 
 vim.cmd [[exec "nohlsearch"]]
 
 -- command line mode cursor movement
--- keymap("c", "<C-A>", "<Home>", opts)
--- keymap("c", "<C-E>", "<END>", opts)
--- keymap("c", "<C-P>", "<UP>", opts)
--- keymap("c", "<C-N>", "<Down>", opts)
--- keymap("c", "<C-H>", "<Left>", opts)
--- keymap("c", "<C-L>", "<Right>", opts)
--- keymap("c", "<M-H>", "<S-Left>", opts)
--- keymap("c", "<M-L>", "<S-Right>", opts)
-vim.cmd [[cnoremap <C-A> <Home>]]
-vim.cmd [[cnoremap <C-E> <End>]]
-vim.cmd [[cnoremap <C-P> <Up>]]
-vim.cmd [[cnoremap <C-N> <Down>]]
-vim.cmd [[cnoremap <C-H> <Left>]]
-vim.cmd [[cnoremap <C-L> <Right>]]
-vim.cmd [[cnoremap <M-H> <S-Left>]]
-vim.cmd [[cnoremap <M-L> <S-Right>]]
+keymap("c", "<C-A>", "<Home>", { noremap = true, silent = false })
+keymap("c", "<C-E>", "<END>", { noremap = true, silent = false })
+keymap("c", "<C-P>", "<UP>", { noremap = true, silent = false })
+keymap("c", "<C-N>", "<Down>", { noremap = true, silent = false })
+keymap("c", "<C-H>", "<Left>", { noremap = true, silent = false })
+keymap("c", "<C-L>", "<Right>", { noremap = true, silent = false })
+keymap("c", "<M-H>", "<S-Left>", { noremap = true, silent = false })
+keymap("c", "<M-L>", "<S-Right>", { noremap = true, silent = false })
 
 keymap("i", "<C-K>", "<UP>", opts)
 keymap("i", "<C-J>", "<Down>", opts)
 keymap("i", "<C-B>", "<Left>", opts)
 keymap("i", "<C-L>", "<Right>", opts)
+-- make :lmap and IM turn off automatically when leaving Insert mode.
+keymap("i", "<Esc>", "<ESC>:set iminsert=0 imsearch=0<CR>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -168,5 +162,4 @@ keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 -- keymap("n", "gx", [[:execute '!brave ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 -- Change '<CR>' to whatever shortcut you like :)
-vim.api.nvim_set_keymap('n', '<CR>', '<cmd>NeoZoomToggle<CR>', { noremap=true, silent=true, nowait=true })
-
+keymap("n", "<CR>", "<cmd>NeoZoomToggle<CR>", { noremap = true, silent = true, nowait = true })

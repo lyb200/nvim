@@ -50,7 +50,7 @@ return packer.startup(function(use)
   use { "kyazdani42/nvim-tree.lua", commit = "f183c7f31197ae499c3420341fb8b275636a49b8" }
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"       -- status
+  use "nvim-lualine/lualine.nvim" -- status
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
@@ -59,7 +59,7 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
-  use "phaazon/hop.nvim"                   -- anyjump
+  use "phaazon/hop.nvim" -- anyjump
   use "andymass/vim-matchup"
   use "nacro90/numb.nvim"
   use "monaqa/dial.nvim"
@@ -87,7 +87,19 @@ return packer.startup(function(use)
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = "markdown",
+    cmd = "MarkdownPreview",
   }
+  use {
+    "dhruvasagar/vim-table-mode",
+    opt = true,
+    cmd = "TableModeToggle",
+    ft = { "markdown", "text" },
+  }
+  use {
+    "dkarter/bullets.vim",
+    opt = true,
+    ft = { "markdown", "text", "gitcommit", "scratch" },
+  } -- 对部分文件进行自动编号或重复插入 - or *
 
   use "machakann/vim-highlightedyank"
 
@@ -97,7 +109,7 @@ return packer.startup(function(use)
   use "lunarvim/darkplus.nvim"
   use "rose-pine/neovim"
   use "rebelot/kanagawa.nvim"
-  use "ajmwagar/vim-deus"         -- my favorite colorsche
+  use "ajmwagar/vim-deus" -- my favorite colorsche
   -- use "theniceboy/nvim-deus"
   use "morhetz/gruvbox"
 
@@ -183,11 +195,11 @@ return packer.startup(function(use)
   use "Pocco81/DAPInstall.nvim"
 
   -- Translating plugin for Vim/Neovim
-  use 'lyb200/vim-translator'
+  use "lyb200/vim-translator"
   -- use 'voldikss/vim-translator'
 
   -- A simple plugin for opening urls in browser
-  use 'lyb200/vim-open-url'
+  use "lyb200/vim-open-url"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
