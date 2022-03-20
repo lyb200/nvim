@@ -69,15 +69,6 @@ local setup = {
   },
 }
 
-local opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
 local m_opts = {
   mode = "n", -- NORMAL mode
   prefix = "m",
@@ -102,6 +93,15 @@ local m_mappings = {
   u = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', "Harpoon UI" },
 }
 
+local opts = {
+  mode = "n", -- NORMAL mode
+  prefix = "<leader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
@@ -109,16 +109,9 @@ local mappings = {
     "Buffers",
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  -- ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "No HL" },
-  -- ["q"] = { "<cmd>q!<CR>", "Quit" },
+  ["h"] = { "<cmd>nohlsearch<CR>", "No hlsearch" },
   ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  -- ["f"] = {
-  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-  --   "Find files",
-  -- },
-  -- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
   ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
@@ -161,7 +154,11 @@ local mappings = {
 
   g = {
     name = "Git",
-    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    -- g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    g = {
+      ":FloatermNew --width=0.8 --height=0.96 --wintype=float --name=lazygit --position=center --autoclose=1 lazygit<CR>",
+      "Lazygit",
+    },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>GitBlameToggle<cr>", "Blame" },
@@ -255,13 +252,47 @@ local mappings = {
     -- ["2"] = { ":2ToggleTerm<cr>", "2" },
     -- ["3"] = { ":3ToggleTerm<cr>", "3" },
     -- ["4"] = { ":4ToggleTerm<cr>", "4" },
-    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    -- n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+    -- u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+    -- t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+    -- p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+    -- f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+    -- h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    -- v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+
+    -- If wintype is split/vsplit:
+    ------ 'leftabove', 'aboveleft', 'rightbelow', 'belowright', 'topleft', 'botright'. Default: 'botright'.
+    -- If wintype is float:
+    ------ 'top', 'bottom', 'left', 'right', 'topleft', 'topright', 'bottomleft', 'bottomright', 'center',
+    ------ 'auto'(at the cursor place). Default: 'center'
+    n = {
+      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Node --position=center --autoclose=1 node<CR>",
+      "Node",
+    },
+    u = {
+      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=NCDU --position=center --autoclose=1 ncdu<CR>",
+      "NCDU",
+    },
+    p = {
+      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Python --position=center --autoclose=1 python<CR>",
+      "Python",
+    },
+    t = {
+      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
+      "Htop",
+    },
+    f = {
+      ":FloatermToggle --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+      "Float",
+    },
+    h = {
+      ":FloatermNew --width=0.4 --height=0.4 --wintype=split --name=Horizontal --position=botright --autoclose=1<CR>",
+      "Horizontal",
+    },
+    v = {
+      ":FloatermNew --width=0.4 --height=0.4 --wintype=vsplit --name=Vertical --position=botright --autoclose=1<CR>",
+      "Vertical",
+    },
   },
 
   T = {
@@ -270,14 +301,30 @@ local mappings = {
     p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
   },
   -- Press to close the window below the current window
-  q = { "<C-w>j:q<CR", "close window below" },
+  Q = { "<C-w>j:q<CR>", "close window below" },
   k = { "K", "keywordprg" },
   m = {
     name = "Markdown",
     p = { ":MarkdownPreview", "MarkdownPreview" },
-    t = { ":MarkdownPreviewToggle", "MarkdownPreviewToggle" },
+    T = { ":MarkdownPreviewToggle", "MarkdownPreviewToggle" },
     s = { ":MarkdownPreviewStop", "MarkdownPreviewStop" },
+    t = { "<cmd>TableModeToggle<CR>", "tab mode toggle" },
+    r = { "<cmd>RenumberList<CR>", "RenumberList" },
+    x = { "<cmd>ToggleCheckbox<CR>", "ToggleCheckbox" },
   },
+  [";"] = { ";", "original ;" },
+  H = { "H", "original H" },
+  L = { "L", "original L" },
+  j = {
+    name = "Hop jump",
+    c = { ":HopChar1<CR>", "jump char1" },
+    C = { ":HopChar2<CR>", "jump char2" },
+    l = { ":HopLine<CR>", "jump line" },
+    p = { ":HopPattern<cr>", "jump pattern" },
+    w = { ":HopWord<CR>", "jump word" },
+  },
+  d = { ":call CompileRunGcc()<CR>", "debug run code" },
+  o = { ":RnvimrToggle<CR>", "Ranger<M-r|s>" },
 }
 
 local vopts = {
@@ -292,20 +339,22 @@ local vopts = {
 local vmappings = {
   ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
   s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
+  m = {
+    name = "Markdown",
+    r = { "<cmd>RenumberSelection<CR>", "RenumberSelection" },
+  },
 }
 
 local s_opts = {
   mode = "n", -- NORMAL mode
   prefix = "s",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
+  silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
 
 local s_mappings = {
-  c = { ":set spell!<CR>", "spelling check" },
-  f = { ":set filetype=", "filetype" },
   l = { ":set splitright<CR>:vnew<CR>", "vertical splitright" },
   h = { ":set nosplitright<CR>:vnew<CR>", "vertical splitleft" },
   j = { ":set splitright<CR>:new<CR>", "splitbelow" },
@@ -318,58 +367,91 @@ local s_mappings = {
     h = { "<C-W>b<C-w>K", "rotate up" },
     v = { "<C-W>b<C-w>H", "rotate down" },
   },
-  s = { ":%s/\v/g<left><left>", "substitute" },
   S = {
     name = "Session",
-    s = { "<cmd>SaveSession<cr>", "Save" },
+    s = { "<cmd>SaveSession<cr>", "Save session" },
     l = { "<cmd>LoadLastSession!<cr>", "Load Last" },
     d = { "<cmd>LoadCurrentDirSession!<cr>", "Load Last Dir" },
     f = { "<cmd>Telescope sessions save_current=false<cr>", "Find Session" },
   },
-  g = { "ea<C-x><C-s>", "spell suggestion" },
-  w = { ":set wrap<CR>", "wrap" },
-  W = { ":set nowrap<CR>", "nowrap" },
-  t = {
+  T = {
     name = "tab",
     c = { ":tabedit<CR>", "new tab" },
-    p = { ":-tabmove<CR>", "to prev" },
-    n = { ":+tabmove<CR>", "to next" },
-    f = { ":0tabmove<CR>", "to first" },
-    l = { ":$tabmove<CR>", "to last" },
+    p = { ":-tabmove<CR>", "move prev" },
+    n = { ":+tabmove<CR>", "move next" },
+    f = { ":0tabmove<CR>", "move first" },
+    l = { ":$tabmove<CR>", "move last" },
   },
   d = { "/\\v(<\\w+>)\\_s*<\\1><CR>", "adjacent duplicate words" },
   b = { "<Plug>(open-url-search-baidu)", "baidu search" },
-  m = { "<Plug>(open-url-search-bing)", "bing search" },
+  w = { "<Plug>(open-url-search-bing)", "bing search" },
   B = { "<Plug>(open-url-browser)", "open url" },
-  T = { "<Plug>(open-url-search-translate)", "baidu translate" },
-  M = { "<Plug>(open-url-search-wikipedia)", "wikipedia search" },
+  W = { "<Plug>(open-url-search-wikipedia)", "wikipedia search" },
+  p = { '"+p', "system copyboard" },
+  t = {
+    name = "Translate",
+    c = { "<Plug>Translate", "in cmdline" },
+    f = { "<Plug>TranslateW", "in floaterm" },
+    r = { "<Plug>TranslateR", "Replace with" },
+    x = { "<Plug>TranslateX", "in clipboard" },
+    T = { "<Plug>(open-url-search-translate)", "baidu translate" },
+  },
 }
 
 local s_vopts = {
   mode = "v", -- VISUAL mode
   prefix = "s",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
+  silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
 
 local s_vmappings = {
-  s = { ":s/\v/g<left><left>", "substitute" },
+  p = { '"+p', "system copyboard" },
+  t = {
+    name = "Translate",
+    c = { "<Plug>TranslateV", "in cmdline" },
+    f = { "<Plug>TranslateWV", "in floaterm" },
+    r = { "<Plug>TranslateRV", "Replace with" },
+  },
 }
 
---[[ local s_iopts = {
-  mode = "i", -- VISUAL mode
-  prefix = "s",
+local backslash_opts = { -- comma
+  mode = "n", -- VISUAL mode
+  prefix = "\\",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = false, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local s_imappings = {
-  g = { '<Esc>ea<C-x><C-s>', 'spell suggestion'},
-} ]]
+local backslash_mappings = {
+  S = {
+    name = "Spell",
+    c = { ":set spell!<CR>", "spelling check" },
+    g = { "ea<C-x><C-s>", "spell suggestion" },
+  },
+  f = { ":set filetype=", "set filetype" },
+  -- need install figlet
+  g = { ":r !figlet", "get picture" },
+  s = { ":%s/\\v/g<left><left>", "substitute" },
+  w = { ":set wrap<CR>", "wrap" },
+  W = { ":set nowrap<CR>", "nowrap" },
+}
+
+local backslash_vopts = { -- comma
+  mode = "v", -- VISUAL mode
+  prefix = "\\",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = false, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local backslash_vmappings = {
+  s = { ":s/\\v/g<left><left>", "substitute" },
+}
 
 local c_opts = { -- comma
   mode = "n", -- VISUAL mode
@@ -382,27 +464,6 @@ local c_opts = { -- comma
 
 local c_mappings = {
   [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
-  p = { '"+p', "system copyboard" },
-  -- need install figlet
-  g = { ":r !figlet", "get picture" },
-  f = { ":HopChar1<CR>", "jump char1" },
-  w = { ":HopWord<CR>", "jump word" },
-  s = { ":HopChar2<CR>", "jump char2" },
-  l = { ":HopLine<CR>", "jump line" },
-  P = { ":HopPattern<cr>", "jump pattern" },
-  t = {
-    name = "Translate",
-    c = { "<Plug>Translate", "in cmdline" },
-    w = { "<Plug>TranslateW", "in window" },
-    r = { "<Plug>TranslateR", "Replace with" },
-    x = { "<Plug>TranslateX", "in clipboard" },
-  },
-  m = {
-    name = "Markdown",
-    t = { "<cmd>TableModeToggle<CR>", "tab mode toggle" },
-    r = { "<cmd>RenumberList<CR>", "RenumberList" },
-    x = { "<cmd>ToggleCheckbox<CR>", "ToggleCheckbox" },
-  },
 }
 
 local c_vopts = { -- comma
@@ -414,19 +475,7 @@ local c_vopts = { -- comma
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local c_vmappings = {
-  p = { '"+p', "system copyboard" },
-  t = {
-    name = "Translate",
-    c = { "<Plug>TranslateV", "in cmdline" },
-    w = { "<Plug>TranslateWV", "in window" },
-    r = { "<Plug>TranslateRV", "Replace with" },
-  },
-  m = {
-    name = "Markdown",
-    r = { "<cmd>RenumberSelection<CR>", "RenumberSelection" },
-  },
-}
+local c_vmappings = {}
 
 local c_iopts = { -- comma
   mode = "i", -- VISUAL mode
@@ -462,7 +511,8 @@ which_key.register(vmappings, vopts)
 which_key.register(m_mappings, m_opts)
 which_key.register(s_mappings, s_opts)
 which_key.register(s_vmappings, s_vopts)
--- which_key.register(s_imappings, s_iopts)
 which_key.register(c_mappings, c_opts)
 which_key.register(c_imappings, c_iopts)
 which_key.register(c_vmappings, c_vopts)
+which_key.register(backslash_mappings, backslash_opts)
+which_key.register(backslash_vmappings, backslash_vopts)

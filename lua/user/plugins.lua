@@ -51,7 +51,24 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim" -- status
-  use "akinsho/toggleterm.nvim"
+  -- terminal toggle
+  -- use { "akinsho/toggleterm.nvim" }
+  -- Terminal manager for (neo)vim
+  use {
+    "voldikss/vim-floaterm",
+    cmd = {
+      "FloatermNew",
+      "FloatermNext",
+      "FloatermPrev",
+      "FloatermFirst",
+      "FloatermLast",
+      "FloatermUpdate",
+      "FloatermToggle",
+      "FloatermHide",
+      "FloatermKill",
+      "FloatermSend",
+    },
+  }
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
@@ -59,23 +76,23 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
-  use "phaazon/hop.nvim" -- anyjump
+  use { "phaazon/hop.nvim" } -- any jump
   use "andymass/vim-matchup"
   use "nacro90/numb.nvim"
   use "monaqa/dial.nvim"
   use "norcalli/nvim-colorizer.lua"
   use "windwp/nvim-spectre"
-  use "folke/zen-mode.nvim"
+  use { "folke/zen-mode.nvim" }
   use "karb94/neoscroll.nvim"
-  use "folke/todo-comments.nvim"
+  use { "folke/todo-comments.nvim" }
   use "kevinhwang91/nvim-bqf"
   use "ThePrimeagen/harpoon"
-  use "MattesGroeger/vim-bookmarks"
+  use { "MattesGroeger/vim-bookmarks" }
   use "lunarvim/vim-solidity"
   use "tpope/vim-surround"
   -- use "ur4ltz/surround.nvim"
   use "tpope/vim-repeat"
-  use "Shatur/neovim-session-manager"
+  use { "Shatur/neovim-session-manager" }
   use "rcarriga/nvim-notify"
   use "tversteeg/registers.nvim"
   -- use "metakirby5/codi.vim"
@@ -105,13 +122,13 @@ return packer.startup(function(use)
 
   -- Colorschemes
   -- use "folke/tokyonight.nvim"
-  use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use "lunarvim/darkplus.nvim"
-  use "rose-pine/neovim"
-  use "rebelot/kanagawa.nvim"
+  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+  -- use "lunarvim/darkplus.nvim"
+  -- use "rose-pine/neovim"
+  -- use "rebelot/kanagawa.nvim"
   use "ajmwagar/vim-deus" -- my favorite colorsche
   -- use "theniceboy/nvim-deus"
-  use "morhetz/gruvbox"
+  -- use "morhetz/gruvbox"
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp", commit = "d93104244c3834fbd8f3dd01da9729920e0b5fe7" } -- The completion plugin
@@ -132,7 +149,6 @@ return packer.startup(function(use)
         sort = true,
       }
     end,
-
     run = "./install.sh",
     requires = "hrsh7th/nvim-cmp",
   }
@@ -159,7 +175,7 @@ return packer.startup(function(use)
   use "RRethy/vim-illuminate"
 
   -- Java
-  use "mfussenegger/nvim-jdtls"
+  -- use "mfussenegger/nvim-jdtls"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -187,6 +203,23 @@ return packer.startup(function(use)
   use "mattn/vim-gist"
   use "mattn/webapi-vim"
   use "rhysd/conflict-marker.vim"
+  use {
+    "tpope/vim-fugitive",
+    cmd = {
+      "G",
+      "Git",
+      "GEdit",
+      "Gsplit",
+      "Gdiffsplit",
+      "Gread",
+      "GWrite",
+      "Ggrep",
+      "GMove",
+      "GDelete",
+      "GBrowse",
+    },
+  } -- Git commands in nvim
+  use "tpope/vim-rhubarb" -- Fugitive-companion to interact with github
 
   -- DAP
   use "mfussenegger/nvim-dap"
@@ -195,11 +228,14 @@ return packer.startup(function(use)
   use "Pocco81/DAPInstall.nvim"
 
   -- Translating plugin for Vim/Neovim
-  use "lyb200/vim-translator"
+  use { "lyb200/vim-translator" }
   -- use 'voldikss/vim-translator'
 
   -- A simple plugin for opening urls in browser
-  use "lyb200/vim-open-url"
+  use { "lyb200/vim-open-url" }
+
+  -- ranger
+  use { "kevinhwang91/rnvimr", cmd = { "RnvimrToggle", "RnvimrResize" } }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -34,7 +34,12 @@ local function footer()
   -- local fortune = handle:read("*a")
   -- handle:close()
   -- return fortune
-  return "chrisatmachine.com"
+  -- return "chrisatmachine.com"
+  local version = vim.version()
+  local print_version = "v" .. version.major .. "." .. version.minor .. "." .. version.patch
+  local datetime = os.date "%Y/%m/%d %H:%M:%S"
+
+  return "Neovim " .. print_version .. " " .. datetime
 end
 
 dashboard.section.footer.val = footer()

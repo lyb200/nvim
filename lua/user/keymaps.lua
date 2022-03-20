@@ -24,13 +24,20 @@ vim.g.maplocalleader = " "
 keymap("v", "Y", '"+y', opts)
 keymap("n", ";", ":", { noremap = true, silent = false })
 keymap("v", ";", ":", { noremap = true, silent = false })
-keymap("n", "<space>;", ";", { noremap = true, silent = false })
--- vim.cmd [[nnoremap <space>; :]]
+-- keymap("n", "<space>;", ";", { noremap = true, silent = false })
+
+--Remap for dealing with line wrap
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 -- j, k  Store relative line number jumps in the jumplist
 -- if they exceed a threshold.
-keymap("n", "k", "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", { noremap = true, expr = true })
-keymap("n", "j", "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", { noremap = true, expr = true })
+-- keymap("n", "k", "(v:count > 5 ? \"m'\" . v:count : '') . 'k'", { noremap = true, expr = true })
+-- keymap("n", "j", "(v:count > 5 ? \"m'\" . v:count : '') . 'j'", { noremap = true, expr = true })
+
+-- Jump cursor to start or end of current line
+keymap("n", "se", 'col(".")==1?"$":"0"', { noremap = true, expr = true, silent = true })
+keymap("v", "se", 'col(".")==1?"$":"0"', { noremap = true, expr = true, silent = true })
 
 -- select, delete, yank all document
 keymap("o", "al", ":<c-u>normal! ggVG<CR>", opts)
@@ -38,12 +45,17 @@ keymap("n", "val", "ggVG", opts)
 -- save and quit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
-vim.cmd [[
-  cnoreabbrev Wq wq
-  cnoreabbrev WQ wq
-  cnoreabbrev W w
-  cnoreabbrev Q q
-]]
+-- vim.cmd [[
+--   cnoreabbrev Wq wq
+--   cnoreabbrev WQ wq
+--   cnoreabbrev W w
+--   cnoreabbrev Q q
+-- ]]
+vim.cmd ":command! WQ wq"
+vim.cmd ":command! Wq wq"
+vim.cmd ":command! Wqa wqa"
+vim.cmd ":command! W w"
+vim.cmd ":command! Q q"
 
 -- Allow saving of files as sudo when I forgot to start vim using sudo.
 -- keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", opts)
@@ -71,7 +83,7 @@ keymap("c", "<M-L>", "<S-Right>", { noremap = true, silent = false })
 
 keymap("i", "<C-K>", "<UP>", opts)
 keymap("i", "<C-J>", "<Down>", opts)
-keymap("i", "<C-B>", "<Left>", opts)
+keymap("i", "<C-H>", "<Left>", opts)
 keymap("i", "<C-L>", "<Right>", opts)
 -- make :lmap and IM turn off automatically when leaving Insert mode.
 keymap("i", "<Esc>", "<ESC>:set iminsert=0 imsearch=0<CR>", opts)
@@ -163,3 +175,70 @@ keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 -- Change '<CR>' to whatever shortcut you like :)
 keymap("n", "<CR>", "<cmd>NeoZoomToggle<CR>", { noremap = true, silent = true, nowait = true })
+
+-- my some function
+-- can make * at visual characters
+vim.cmd [[
+  function! s:VSetSearch(cmdtype)
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+    let @s = temp
+  endfunction
+]]
+
+keymap("x", "*", ":<C-u>call VSetSearch('/')<CR>/<C-R>=@/<CR><CR>", opts)
+keymap("x", "#", ":<C-u>call VSetSearch('?')<CR>?<C-R>=@/<CR><CR>", opts)
+
+vim.cmd [[
+  func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+      exec "!g++ % -o %<"
+      exec "!time ./%<"
+    elseif &filetype == 'cpp'
+      exec "!g++ -std=c++11 % -Wall -o %<"
+      :FloatermNew ./%<
+      " set splitbelow
+      " :spilt
+      " :resize -15
+      " :term ./%<
+    elseif &filetype == 'java'
+      exec "!javac %"
+      exec "!time java %<"
+    elseif &filetype == 'sh'
+      :!time bash %
+    elseif &filetype == 'python'
+      :FloatermNew python %
+      " set splitbelow
+      " :sp
+      " :term python %
+    elseif &filetype == 'html'
+      silent! exec "!".g:mkdp_browser." % &"
+    elseif &filetype == 'markdown'
+      exec ":MarkdownPreview"
+    elseif &filetype == 'tex'
+      silent! exec "VimtexStop"
+      silent! exec "VimtexCompile"
+    elseif &filetype == 'dart'
+      exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
+      silent! exec "CocCommand flutter.dev.openDevLog"
+    elseif &filetype == 'javascript'
+      :FloatermNew export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+      " set splitbelow
+      " :sp
+      " :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+    elseif &filetype == 'go'
+      :FloatermNew go run .
+      " set splitbelow
+      " :sp
+      " :term go run .
+    elseif &filetype == 'lua'
+      if has('unix')
+        :FloatermNew lua %
+      else
+        :FloatermNew c:\lua_bin/lua54 %
+      endif
+    endif
+  endfunc
+]]
