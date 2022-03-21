@@ -197,9 +197,9 @@ return packer.startup(function(use)
   use "mizlan/iswap.nvim"
 
   -- Git
-  use "lewis6991/gitsigns.nvim"
-  use "f-person/git-blame.nvim"
-  use "ruifm/gitlinker.nvim"
+  use "lewis6991/gitsigns.nvim" -- Git integration: signs, hunk actions, blame, etc.
+  use "f-person/git-blame.nvim" -- Show git blame info
+  use "ruifm/gitlinker.nvim" -- Generate shareable file permalinks for several git hosts.
   use "mattn/vim-gist"
   use "mattn/webapi-vim"
   use "rhysd/conflict-marker.vim"

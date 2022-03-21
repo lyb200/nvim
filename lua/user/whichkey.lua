@@ -115,7 +115,9 @@ local mappings = {
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
   ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
-  ["gy"] = "Link",
+  ["gy"] = "Gitlinker",
+  ["gc"] = "Comment",
+  ["gb"] = "Block Comment",
 
   p = {
     name = "Packer",
