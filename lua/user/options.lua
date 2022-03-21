@@ -41,6 +41,7 @@ local options = {
   -- set listchars+=nbsp:⦸   "CIRCLED reverse solidus(U+29B8)
   -- »(U+00BB) «(U+00AB) •(U+2022) ▷(U+25B7) →(U2192) ↲(U21b2)
   listchars = { tab = "| ", trail = "▫" },
+  -- listchars = { eol = "↲", tab = "▸ ", trail = "▫" },
   -- colorcolumn = "80",
   colorcolumn = "120",
   splitbelow = true, -- force all horizontal splits to go below current window
@@ -104,6 +105,7 @@ opt.matchpairs:append "<:>,«:»"
 
 -- some terminal need
 vim.cmd [[
+  " set color
   let &t_CO=256
   " some version color incorrect
   let &t_ut=''
@@ -111,9 +113,11 @@ vim.cmd [[
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-]]
 
-vim.cmd [[filetype plugin indent on]]
+  filetype plugin indent on
+  syntax enable
+  exec "nohlsearch"
+]]
 
 if has "unix" then
   opt.keywordprg = ":help" -- this option maybe ":Man"

@@ -8,7 +8,7 @@ local keymap = vim.api.nvim_set_keymap
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 keymap("", "s", "<Nop>", opts)
-keymap("", ",", "<Nop>", opts)
+-- keymap("", ",", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -24,7 +24,7 @@ vim.g.maplocalleader = " "
 keymap("v", "Y", '"+y', opts)
 keymap("n", ";", ":", { noremap = true, silent = false })
 keymap("v", ";", ":", { noremap = true, silent = false })
--- keymap("n", "<space>;", ";", { noremap = true, silent = false })
+keymap("n", ",", ";", { noremap = true, silent = false })
 
 --Remap for dealing with line wrap
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -51,15 +51,15 @@ keymap("n", "Q", ":q<CR>", opts)
 --   cnoreabbrev W w
 --   cnoreabbrev Q q
 -- ]]
-vim.cmd ":command! WQ wq"
-vim.cmd ":command! Wq wq"
-vim.cmd ":command! Wqa wqa"
-vim.cmd ":command! W w"
-vim.cmd ":command! Q q"
+-- vim.cmd ":command! WQ wq"  -- useful
+keymap("c", "W", "w", opts)
+keymap("c", "Q", "q", opts)
+keymap("c", "WQ", "wq", opts)
+keymap("c", "WQA", "wqa", opts)
 
 -- Allow saving of files as sudo when I forgot to start vim using sudo.
--- keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", opts)
-vim.cmd [[cnoremap <C-S> :<C-u>w !sudo tee > /dev/null %]]
+keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", { noremap = true })
+-- vim.cmd [[cnoremap <C-S> :<C-u>w !sudo tee > /dev/null %]]
 
 keymap("n", "/", "/\\v", {})
 -- keymap("v", "/", "/\\v", {})
@@ -68,8 +68,6 @@ keymap("n", "?", "?\\v", {})
 
 keymap("n", "&", ":&&<CR>", { noremap = true })
 keymap("x", "&", ":&&<CR>", { noremap = true })
-
-vim.cmd [[exec "nohlsearch"]]
 
 -- command line mode cursor movement
 keymap("c", "<C-A>", "<Home>", { noremap = true, silent = false })

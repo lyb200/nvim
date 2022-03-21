@@ -127,10 +127,12 @@ local mappings = {
   },
 
   r = {
-    name = "Replace",
-    r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+    name = "Replace Ranger Run",
+    p = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
     w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
     f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+    u = { ":call CompileRunGcc()<CR>", "debug run code" },
+    a = { ":RnvimrToggle<CR>", "Ranger<M-r>|<M-s>" },
   },
 
   f = {
@@ -278,12 +280,17 @@ local mappings = {
       "Python",
     },
     t = {
-      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
+      ":FloatermNew --width=0.8 --height=0.9 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
       "Htop",
     },
-    f = {
-      ":FloatermToggle --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
-      "Float",
+    c = {
+      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+      "FloatermNew",
+    },
+    T = {
+      -- ":FloatermToggle --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+      ":FloatermToggle --autoclose=1<CR>",
+      "Toggle|<M-f>",
     },
     h = {
       ":FloatermNew --width=0.4 --height=0.4 --wintype=split --name=Horizontal --position=botright --autoclose=1<CR>",
@@ -312,7 +319,8 @@ local mappings = {
     r = { "<cmd>RenumberList<CR>", "RenumberList" },
     x = { "<cmd>ToggleCheckbox<CR>", "ToggleCheckbox" },
   },
-  [";"] = { ";", "original ;" },
+  [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "find->edit<++>" },
+  -- [";"] = { ";", "original ;" },
   H = { "H", "original H" },
   L = { "L", "original L" },
   j = {
@@ -323,8 +331,6 @@ local mappings = {
     p = { ":HopPattern<cr>", "jump pattern" },
     w = { ":HopWord<CR>", "jump word" },
   },
-  d = { ":call CompileRunGcc()<CR>", "debug run code" },
-  o = { ":RnvimrToggle<CR>", "Ranger<M-r|s>" },
 }
 
 local vopts = {
@@ -453,18 +459,18 @@ local backslash_vmappings = {
   s = { ":s/\\v/g<left><left>", "substitute" },
 }
 
-local c_opts = { -- comma
-  mode = "n", -- VISUAL mode
-  prefix = ",",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local c_mappings = {
-  [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
-}
+-- local c_opts = { -- comma
+--   mode = "n", -- VISUAL mode
+--   prefix = ",",
+--   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = true, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+--
+-- local c_mappings = {
+--   [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "find->edit<++>" },
+-- }
 
 local c_vopts = { -- comma
   mode = "v", -- VISUAL mode
@@ -511,7 +517,7 @@ which_key.register(vmappings, vopts)
 which_key.register(m_mappings, m_opts)
 which_key.register(s_mappings, s_opts)
 which_key.register(s_vmappings, s_vopts)
-which_key.register(c_mappings, c_opts)
+-- which_key.register(c_mappings, c_opts)
 which_key.register(c_imappings, c_iopts)
 which_key.register(c_vmappings, c_vopts)
 which_key.register(backslash_mappings, backslash_opts)
