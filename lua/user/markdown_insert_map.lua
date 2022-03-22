@@ -5,14 +5,16 @@ vim.cmd [[
     "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
     autocmd!
     autocmd Filetype markdown inoremap <buffer><silent> ,; <Esc>/<++><CR>:nohlsearch<CR>"_c4l
-    autocmd Filetype markdown inoremap <buffer><silent> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
+    autocmd Filetype markdown inoremap <buffer><silent> ,, <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
     autocmd Filetype markdown inoremap <buffer><silent> ,n ---<CR><CR>
-    autocmd Filetype markdown inoremap <buffer><silent> ,b **** <++><Esc>2F*i
+    autocmd Filetype markdown inoremap <buffer><silent> ,o **** <++><Esc>2F*i
     autocmd Filetype markdown inoremap <buffer><silent> ,s ~~~~ <++><Esc>2F~i
     autocmd Filetype markdown inoremap <buffer><silent> ,i ** <++><Esc>F*i
-    autocmd Filetype markdown inoremap <buffer><silent> ,d `` <++><Esc>F`i
-    autocmd Filetype markdown inoremap <buffer><silent> ,c ```<CR><++><CR>```<CR><CR><++><Esc>4kA
-    autocmd Filetype markdown inoremap <buffer><silent> ,m - [ ]
+    autocmd Filetype markdown inoremap <buffer><silent> ,c `` <++><Esc>F`i
+    autocmd Filetype markdown inoremap <buffer><silent> ,b ```<CR><++><CR>```<CR><CR><++><Esc>4kA
+    autocmd Filetype markdown inoremap <buffer><silent> ,t - [ ]
+    autocmd Filetype markdown inoremap <buffer><silent> ,d - [x]
+    autocmd Filetype markdown inoremap <buffer><silent> ,m @[TOC](Menu) <++><Esc>F(a
     autocmd Filetype markdown inoremap <buffer><silent> ,p ![](<++>) <++><Esc>F[a
     autocmd Filetype markdown inoremap <buffer><silent> ,a [](<++>) <++><Esc>F[a
     autocmd Filetype markdown inoremap <buffer><silent> ,1 #<Space><CR><++><Esc>kA

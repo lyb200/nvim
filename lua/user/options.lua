@@ -129,7 +129,7 @@ if has "linebreak" then
   opt.linebreak = true
   --⤷(U+2937)
   opt.showbreak = "⤷"
-  if fn.empty "breakindentopt" then
+  if fn.empty "breakindentopt" == 1 then
     opt.breakindentopt = "shift:2"
   end
 end
