@@ -25,7 +25,14 @@ local setup = {
   },
   -- add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
-  operators = { gc = "Comments" },
+  operators = {
+    gc = "Comments",
+    gb = "Block comments",
+    ds = "Delete surroundings",
+    cs = "Change surroundings",
+    ys = "You surround",
+    yS = "You indent surround",
+  },
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -57,8 +64,8 @@ local setup = {
   },
   ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = false, -- show help message on the command line when the popup is visible
-  -- triggers = "auto", -- automatically setup triggers
+  show_help = true, -- show help message on the command line when the popup is visible
+  triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -116,8 +123,6 @@ local mappings = {
   ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
   ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
   ["gy"] = "Gitlinker",
-  ["gc"] = "Comment",
-  ["gb"] = "Block Comment",
 
   p = {
     name = "Packer",
@@ -474,44 +479,44 @@ local backslash_vmappings = {
 --   [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "find->edit<++>" },
 -- }
 
-local c_vopts = { -- comma
-  mode = "v", -- VISUAL mode
-  prefix = ",",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = false, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local c_vmappings = {}
-
-local c_iopts = { -- comma
-  mode = "i", -- VISUAL mode
-  prefix = ",",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local c_imappings = {
-  [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
-  w = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "edit  <++>" },
-  l = { "--------<CR>", "line" },
-  n = { "---<CR><CR>", "line" },
-  b = { "**** <++><Esc>2F*i", "bold" },
-  s = { "~~~~ <++><Esc>2F~i", "strike" },
-  i = { "** <++><Esc>F*i", "italic" },
-  d = { "`` <++><Esc>F`i", "line code" },
-  c = { "```<CR><++><CR>```<CR><CR><++><Esc>4kA", "code block" },
-  m = { "- [ ]", "mark" },
-  p = { "![](<++>) <++><Esc>F[a", "picture" },
-  a = { "[](<++>) <++><Esc>F[a", "link" },
-  ["1"] = { "#<Space><CR><++><Esc>kA", "1 heading" },
-  ["2"] = { "##<Space><CR><++><Esc>kA", "2 heading" },
-  ["3"] = { "###<Space><CR><++><Esc>kA", "3 heading" },
-  ["4"] = { "####<Space><CR><++><Esc>kA", "4 heading" },
-}
+-- local c_vopts = { -- comma
+--   mode = "v", -- VISUAL mode
+--   prefix = ",",
+--   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = false, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+--
+-- local c_vmappings = {}
+--
+-- local c_iopts = { -- comma
+--   mode = "i", -- VISUAL mode
+--   prefix = ",",
+--   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = true, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+--
+-- local c_imappings = {
+-- [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "edit <++>" },
+-- w = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "edit  <++>" },
+-- l = { "--------<CR>", "line" },
+-- n = { "---<CR><CR>", "line" },
+-- b = { "**** <++><Esc>2F*i", "bold" },
+-- s = { "~~~~ <++><Esc>2F~i", "strike" },
+-- i = { "** <++><Esc>F*i", "italic" },
+-- d = { "`` <++><Esc>F`i", "line code" },
+-- c = { "```<CR><++><CR>```<CR><CR><++><Esc>4kA", "code block" },
+-- m = { "- [ ]", "mark" },
+-- p = { "![](<++>) <++><Esc>F[a", "picture" },
+-- a = { "[](<++>) <++><Esc>F[a", "link" },
+-- ["1"] = { "#<Space><CR><++><Esc>kA", "1 heading" },
+-- ["2"] = { "##<Space><CR><++><Esc>kA", "2 heading" },
+-- ["3"] = { "###<Space><CR><++><Esc>kA", "3 heading" },
+-- ["4"] = { "####<Space><CR><++><Esc>kA", "4 heading" },
+-- }
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
@@ -520,7 +525,7 @@ which_key.register(m_mappings, m_opts)
 which_key.register(s_mappings, s_opts)
 which_key.register(s_vmappings, s_vopts)
 -- which_key.register(c_mappings, c_opts)
-which_key.register(c_imappings, c_iopts)
-which_key.register(c_vmappings, c_vopts)
+-- which_key.register(c_imappings, c_iopts)
+-- which_key.register(c_vmappings, c_vopts)
 which_key.register(backslash_mappings, backslash_opts)
 which_key.register(backslash_vmappings, backslash_vopts)

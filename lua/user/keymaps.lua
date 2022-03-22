@@ -15,10 +15,14 @@ vim.g.maplocalleader = " "
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+--   visual_select_mode = "v",
+--   visual_mode = "x",
+--   select_mode = "s",
+--   terminal_mode = "t",
+--   command-line_mode = "c",
+--   operator-pending = "o",
+--   insert_command-line_mode = "!",
+--   insert_command-line_lang-Arg_mode = "l",
 
 -- my Keymaps
 keymap("v", "Y", '"+y', opts)
@@ -239,4 +243,27 @@ vim.cmd [[
       endif
     endif
   endfunc
+]]
+
+vim.cmd [[
+augroup markdown_insert_keymap
+  "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
+  autocmd!
+  autocmd Filetype markdown inoremap <buffer><silent> ,; <Esc>/<++><CR>:nohlsearch<CR>"_c4l
+  autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
+  autocmd Filetype markdown inoremap <buffer> ,n ---<CR><CR>
+  autocmd Filetype markdown inoremap <buffer> ,b **** <++><Esc>2F*i
+  autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <++><Esc>2F~i
+  autocmd Filetype markdown inoremap <buffer> ,i ** <++><Esc>F*i
+  autocmd Filetype markdown inoremap <buffer> ,d `` <++><Esc>F`i
+  autocmd Filetype markdown inoremap <buffer> ,c ```<CR><++><CR>```<CR><CR><++><Esc>4kA
+  autocmd Filetype markdown inoremap <buffer> ,m - [ ]
+  autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a
+  autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a
+  autocmd Filetype markdown inoremap <buffer> ,1 #<Space><CR><++><Esc>kA
+  autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><CR><++><Esc>kA
+  autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><CR><++><Esc>kA
+  autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><CR><++><Esc>kA
+  autocmd Filetype markdown inoremap <buffer> ,l --------<CR>
+augroup END
 ]]

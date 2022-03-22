@@ -12,7 +12,6 @@ require "user.comment"
 require "user.nvim-tree"
 require "user.bufferline"
 require "user.lualine"
--- require "user.toggleterm"
 require "user.project"
 require "user.impatient"
 require "user.indentline"
@@ -36,7 +35,7 @@ require "user.git-blame"
 require "user.gist"
 require "user.gitlinker"
 require "user.session-manager"
--- require "user.surround"
+-- require "user.surround"  -- use plugin tpope/vim-surround
 require "user.notify"
 require "user.ts-context"
 require "user.registers"
@@ -47,6 +46,16 @@ require "user.copilot"
 require "user.gps"
 require "user.illuminate"
 require "user.translator"
-require "user.markdown" -- 没有具体代码，只是一些命令的提示
+require "user.markdown" -- none code, some cmd hint
+-- require "user.toggleterm"
 require "user.floaterm"
 require "user.rnvimr"
+
+-- markdown_filetype_imap
+-- require "user.markdown_insert_map"
+vim.cmd [[
+  augroup insert_comma_mapkeys
+    autocmd!
+    autocmd filetype markdown :lua require "user.whichkey_comma"
+  augroup END
+]]
