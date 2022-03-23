@@ -236,6 +236,7 @@ return packer.startup(function(use)
 
   -- ranger
   use { "kevinhwang91/rnvimr", cmd = { "RnvimrToggle", "RnvimrResize" } }
+  -- use "lyokha/vim-xkbswitch"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

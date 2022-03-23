@@ -39,6 +39,41 @@ local g_vmappings = {
   c = { "region linewise comment" },
   b = { "region blockwise comment" },
 }
+--------------------------------------------------
+-- buffer which_key config may not work
+--------------------------------------------------
+-- local g_buf_opts = { -- comma
+--   mode = "n", -- Normal mode
+--   prefix = "g",
+--   buffer = 0, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = true, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+-- local g_buf_mappings = {
+--   D = { "declaration" },
+--   d = { "definition" },
+--   I = { "implementation" },
+--   r = { "references" },
+--   l = { "Open diagnostic" },
+-- }
+--
+-- local buf_opts = { -- buf <leader>
+--   mode = "n",
+--   prefix = "<leader>",
+--   buffer = 0, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = true, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+-- local buf_mappings = {
+--   ["<"] = { "<cmd>lua vim.diagnostic.goto_prev({ border = 'rounded' })<CR>", "Prev_diagnostic" },
+--   [">"] = { "<cmd>lua vim.diagnostic.goto_next({ border = 'rounded' })<CR>", "Next_diagnostic" },
+--   ["q"] = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "diagnostic_local_list" },
+-- }
+--------------------------------------------------
+-- buffer which_key config may not work
+--------------------------------------------------
 
 local c_opts = {
   mode = "n", -- Normal mode
@@ -93,3 +128,5 @@ which_key.register(g_vmappings, g_vopts)
 which_key.register(c_mappings, c_opts)
 which_key.register(d_mappings, d_opts)
 which_key.register(y_mappings, y_opts)
+-- which_key.register(g_buf_mappings, g_buf_opts)
+-- which_key.register(buf_mappings, buf_opts)
