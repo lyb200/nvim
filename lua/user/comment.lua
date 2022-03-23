@@ -21,8 +21,7 @@ comment.setup {
   end,
 }
 
-
---[[ 
+--[[
 Basic mappings
 These mappings are enabled by default. (config: mappings.basic)
     NORMAL mode
@@ -76,5 +75,5 @@ Examples
 
 `gb2}` - Toggle until the 2 next blank line
 `gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
-`gbac` - Toggle comment around a class (w/ LSP/treesitter support) 
+`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
 -- ]]

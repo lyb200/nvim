@@ -1,7 +1,6 @@
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
-require "user.whichkey"
 require "user.colorscheme"
 require "user.cmp"
 require "user.lsp"
@@ -51,10 +50,12 @@ require "user.markdown" -- none code, some cmd hint
 require "user.floaterm"
 require "user.rnvimr"
 
+require "user.whichkey"
+require "user.whichkey_add_builtin"
 -- markdown_filetype_imap
 -- require "user.markdown_insert_map"
 vim.cmd [[
-  augroup insert_comma_mapkeys
+  augroup comma_mapkeys
     autocmd!
     autocmd filetype markdown :lua require "user.whichkey_comma"
   augroup END
