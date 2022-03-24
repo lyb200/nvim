@@ -424,8 +424,8 @@ local s_vmappings = {
   p = { '"+p', "system copyboard" },
   t = {
     name = "Translate",
-    c = { "<Plug>TranslateV", "in cmdline" },
-    f = { "<Plug>TranslateWV", "in floaterm" },
+    c = { "<Plug>TranslateV", "In_cmdline" },
+    f = { "<Plug>TranslateWV", "In_floaterm" },
     r = { "<Plug>TranslateRV", "Replace with" },
   },
 }
@@ -442,18 +442,55 @@ local backslash_opts = { -- comma
 local backslash_mappings = {
   S = {
     name = "Spell",
-    c = { ":set spell!<CR>", "spelling check" },
-    g = { "ea<C-x><C-s>", "spell suggestion" },
+    c = { ":set spell!<CR>", "Spelling_check" },
+    g = { "ea<C-x><C-s>", "Spell_suggestion" },
   },
-  f = { ":set filetype=", "set filetype" },
+  f = { ":set filetype=", "Set filetype" },
   -- need install figlet
-  g = { ":r !figlet", "get picture" },
-  s = { ":%s/\\v/g<left><left>", "substitute" },
+  g = { ":r !figlet", "Get_picture" },
+  s = { ":%s/\\v/g<left><left>", "Substitute" },
   w = { ":set wrap<CR>", "wrap" },
   W = { ":set nowrap<CR>", "nowrap" },
+  c = {
+    name = "Just_list_Ctrl_bindings",
+    ["<C-p>"] = { "Telescope.find_files.dropdown" },
+    ["<C-t>"] = { "Buf.document_symbol" },
+    ["<C-z>"] = { "ZenMode" },
+    ["<C-n>"] = { ":e ~/Notes/" },
+    ["<F2>"] = { "Rename_in_n_i_mode" },
+    ["<F4>"] = { "Telescope_resume" },
+    ["<F5>"] = { "Telescope_comments" },
+    ["<F6>"] = { "Echo_hi<string>_trans<string>" },
+    ["<F7>"] = { "TSHighlightCapturesUnderCursor" },
+    ["<F8>"] = { "TSPlaygroundToggle" },
+    ["<C-i>"] = { "In_rename_buf_to_start" },
+    ["<C-a>"] = { "In_rename_buf_to_end" },
+    ["<C-e>"] = { "In_rename_buf_to_word_end" },
+    ["<C-b>"] = { "In_rename_buf_to_word_start" },
+    ["<C-c>"] = { "In_rename_buf_clear_line" },
+    ["<C-u>"] = { "In_rename_buf_undo" },
+    ["<C-r>"] = { "In_rename_buf_redo" },
+    ["<C-\\>"] = { "FloatermToggle" },
+    ["<t_C-\\>"] = { "FloatermToggle" },
+  },
+  a = {
+    name = "Just_list_Alt_bindings",
+    ["<A-n>"] = { "Illuminate.next_ref" },
+    ["<A-p>"] = { "Illuminate.prev_ref" },
+    ["<A-f>"] = { "In_translator_float_scroll_next" },
+    ["<A-b>"] = { "In_translator_float_scroll_prev" },
+    ["<A-r>"] = { "Ranger_toggle" },
+    ["<t_A-r>"] = { "In_term_Ranger_toggle" },
+    ["<t_A-s>"] = { "In_term_Ranger_resize" },
+    ["<M-f>"] = { "FloatermNew" },
+    ["<A-d>"] = { "FloatermNext" },
+    ["<t_A-d>"] = { "FloatermNext" },
+    ["<A-u>"] = { "FloatermPrev" },
+    ["<t_A-u>"] = { "FloatermPrev" },
+  },
 }
 
-local backslash_vopts = { -- comma
+local backslash_vopts = {
   mode = "v", -- VISUAL mode
   prefix = "\\",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings

@@ -61,6 +61,7 @@ vim.cmd [[
   cnoreabbrev gitc Git commit -m '
   cnoreabbrev gitp Git push
   cnoreabbrev gitl Git pull
+  cnoreabbrev w!! <C-u>w !sudo tee > /dev/null %
 ]]
 
 -- vim.cmd ":command! WQ wq"  -- useful
@@ -115,9 +116,9 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+-- Move text up and down enter insert_mode
+keymap("n", "<A-j>", "<Esc>:move .+1<CR>==gi", opts)
+keymap("n", "<A-k>", "<Esc>:move .-2<CR>==gi", opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -129,6 +130,8 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
+keymap("v", "<A-j>", ":move .+1<CR>==", opts)
+keymap("v", "<A-k>", ":move .-2<CR>==", opts)
 keymap("v", "<A-j>", ":move .+1<CR>==", opts)
 keymap("v", "<A-k>", ":move .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
@@ -169,7 +172,7 @@ keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
 keymap(
   "n",
   "<C-p>",
-  "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+  "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false })<cr>",
   opts
 )
 keymap("n", "<C-t>", "<cmd>lua vim.lsp.buf.document_symbol()<cr>", opts)
@@ -251,27 +254,4 @@ vim.cmd [[
       endif
     endif
   endfunc
-]]
-
-vim.cmd [[
-augroup markdown_insert_keymap
-  "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
-  autocmd!
-  autocmd Filetype markdown inoremap <buffer><silent> ,; <Esc>/<++><CR>:nohlsearch<CR>"_c4l
-  autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
-  autocmd Filetype markdown inoremap <buffer> ,n ---<CR><CR>
-  autocmd Filetype markdown inoremap <buffer> ,b **** <++><Esc>2F*i
-  autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <++><Esc>2F~i
-  autocmd Filetype markdown inoremap <buffer> ,i ** <++><Esc>F*i
-  autocmd Filetype markdown inoremap <buffer> ,d `` <++><Esc>F`i
-  autocmd Filetype markdown inoremap <buffer> ,c ```<CR><++><CR>```<CR><CR><++><Esc>4kA
-  autocmd Filetype markdown inoremap <buffer> ,m - [ ]
-  autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a
-  autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a
-  autocmd Filetype markdown inoremap <buffer> ,1 #<Space><CR><++><Esc>kA
-  autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><CR><++><Esc>kA
-  autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><CR><++><Esc>kA
-  autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><CR><++><Esc>kA
-  autocmd Filetype markdown inoremap <buffer> ,l --------<CR>
-augroup END
 ]]
