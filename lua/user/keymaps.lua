@@ -49,12 +49,20 @@ keymap("n", "val", "ggVG", opts)
 -- save and quit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
--- vim.cmd [[
---   cnoreabbrev Wq wq
---   cnoreabbrev WQ wq
---   cnoreabbrev W w
---   cnoreabbrev Q q
--- ]]
+vim.cmd [[
+" cnoreabbrev Wq wq
+" cnoreabbrev WQ wq
+" cnoreabbrev W w
+" cnoreabbrev Q q
+" Git command
+  cnoreabbrev git Git
+  cnoreabbrev gits Git status
+  cnoreabbrev gita Git add
+  cnoreabbrev gitc Git commit -m '
+  cnoreabbrev gitp Git push
+  cnoreabbrev gitl Git pull
+]]
+
 -- vim.cmd ":command! WQ wq"  -- useful
 keymap("c", "W", "w", opts)
 keymap("c", "Q", "q", opts)

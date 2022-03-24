@@ -53,7 +53,7 @@ require "user.rnvimr"
 require "user.whichkey"
 require "user.whichkey_add_builtin"
 -- markdown_filetype_imap
--- require "user.markdown_insert_map"
+require "user.markdown_insert_map"
 vim.cmd [[
   augroup comma_mapkeys
     autocmd!
