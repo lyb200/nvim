@@ -56,8 +56,9 @@ vim.cmd [[
 " cnoreabbrev Q q
 " Git command
   cnoreabbrev git Git
+  cnoreabbrev gitd Git diff
   cnoreabbrev gits Git status
-  cnoreabbrev gita Git add
+  cnoreabbrev gita Git add .
   cnoreabbrev gitc Git commit -m '
   cnoreabbrev gitp Git push
   cnoreabbrev gitl Git pull
@@ -153,14 +154,15 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Custom
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<TAB>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
--- keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "sq", "<cmd>Bdelete!<CR>", opts)
 -- keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
 keymap("n", "<F3>", ":e .<cr>", opts)
 keymap("n", "<F4>", "<cmd>Telescope resume<cr>", opts)
-keymap("n", "<F5>", "<cmd>Telescope commands<CR>", opts)
+keymap("n", "<F5>", "<cmd>mode<CR>", opts)
+keymap("n", "<F6>", "<cmd>Telescope commands<CR>", opts)
 keymap(
   "n",
-  "<F6>",
+  "<F9>",
   [[:echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>]],
   opts
 )
@@ -188,6 +190,10 @@ keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 -- Change '<CR>' to whatever shortcut you like :)
 keymap("n", "<CR>", "<cmd>NeoZoomToggle<CR>", { noremap = true, silent = true, nowait = true })
+
+keymap("n", "<space>a", "<cmd>Alpha<cr>", opts)
+keymap("n", "<space>e", "<cmd>NvimTreeToggle<cr>", opts)
+keymap("n", "<space>h", "<cmd>nohlsearch<CR>", opts)
 
 -- my some function
 -- can make * at visual characters
