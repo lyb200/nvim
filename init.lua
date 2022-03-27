@@ -14,7 +14,7 @@ require "user.lualine"
 require "user.project"
 require "user.impatient"
 require "user.indentline"
-require "user.alpha"
+require "user.alpha" -- Home page
 require "user.autocommands"
 require "user.quickscope"
 require "user.hop"
@@ -51,12 +51,7 @@ require "user.floaterm"
 require "user.rnvimr"
 
 require "user.whichkey"
-require "user.whichkey_add_builtin"
+require "user.whichkey_other"
 -- markdown_filetype_imap
-require "user.markdown_insert_map"
-vim.cmd [[
-  augroup comma_mapkeys
-    autocmd!
-    autocmd filetype markdown :lua require "user.whichkey_comma"
-  augroup END
-]]
+-- require "user.markdown_insert_map"
+require "user.whichkey_comma"

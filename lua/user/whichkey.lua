@@ -1,4 +1,4 @@
-local status_ok, which_key = pcall(require, "which-key")
+-- local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
   return
 end
@@ -145,9 +145,9 @@ local mappings = {
   },
 
   f = {
-    name = "Find",
+    name = "Telescope find",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     f = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Find files",
@@ -159,8 +159,9 @@ local mappings = {
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
-    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-    C = { "<cmd>Telescope commands<cr>", "Commands" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps list" },
+    c = { "<cmd>Telescope commands<cr>", "Commands list" },
+    s = { "<cmd>Telescope treesitter<cr>", "Symbols in buffer" },
   },
 
   g = {
@@ -277,36 +278,36 @@ local mappings = {
     ------ 'top', 'bottom', 'left', 'right', 'topleft', 'topright', 'bottomleft', 'bottomright', 'center',
     ------ 'auto'(at the cursor place). Default: 'center'
     n = {
-      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Node --position=center --autoclose=1 node<CR>",
+      -- ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Node --position=center --autoclose=1 node<CR>",
       "Node",
     },
     u = {
-      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=NCDU --position=center --autoclose=1 ncdu<CR>",
+      -- ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=NCDU --position=center --autoclose=1 ncdu<CR>",
       "NCDU",
     },
     p = {
-      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Python --position=center --autoclose=1 python<CR>",
+      -- ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Python --position=center --autoclose=1 python<CR>",
       "Python",
     },
     t = {
-      ":FloatermNew --width=0.8 --height=0.9 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
+      -- ":FloatermNew --width=0.8 --height=0.9 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
       "Htop",
     },
     c = {
-      ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+      -- ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
       "FloatermNew",
     },
     T = {
       -- ":FloatermToggle --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
-      ":FloatermToggle --autoclose=1<CR>",
+      -- ":FloatermToggle --autoclose=1<CR>",
       "Toggle|<M-f>",
     },
     h = {
-      ":FloatermNew --width=0.4 --height=0.4 --wintype=split --name=Horizontal --position=botright --autoclose=1<CR>",
+      -- ":FloatermNew --width=0.4 --height=0.4 --wintype=split --name=Horizontal --position=botright --autoclose=1<CR>",
       "Horizontal",
     },
     v = {
-      ":FloatermNew --width=0.4 --height=0.4 --wintype=vsplit --name=Vertical --position=botright --autoclose=1<CR>",
+      -- ":FloatermNew --width=0.4 --height=0.4 --wintype=vsplit --name=Vertical --position=botright --autoclose=1<CR>",
       "Vertical",
     },
   },
@@ -319,9 +320,9 @@ local mappings = {
   k = { "K", "keywordprg" },
   m = {
     name = "Markdown",
-    p = { ":MarkdownPreview", "MarkdownPreview" },
-    T = { ":MarkdownPreviewToggle", "MarkdownPreviewToggle" },
-    s = { ":MarkdownPreviewStop", "MarkdownPreviewStop" },
+    p = { ":MarkdownPreview<CR>", "MarkdownPreview" },
+    T = { ":MarkdownPreviewToggle<CR>", "MarkdownPreviewToggle" },
+    s = { ":MarkdownPreviewStop<CR>", "MarkdownPreviewStop" },
     t = { "<cmd>TableModeToggle<CR>", "tab mode toggle" },
     r = { "<cmd>RenumberList<CR>", "RenumberList" },
     x = { "<cmd>ToggleCheckbox<CR>", "ToggleCheckbox" },
@@ -354,6 +355,8 @@ local vmappings = {
     name = "Markdown",
     r = { "<cmd>RenumberSelection<CR>", "RenumberSelection" },
   },
+  y = { "selected text in register" },
+  Y = { "selected text in register" },
 }
 
 which_key.setup(setup)

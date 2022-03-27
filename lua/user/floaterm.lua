@@ -20,6 +20,7 @@
 
 local set_var = vim.api.nvim_set_var
 local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
 
 set_var("floaterm_width", 0.7)
 set_var("floaterm_height", 0.8)
@@ -43,9 +44,54 @@ keymap(
   "<C-\\><C-n>:FloatermNew --width=0.7 --height=0.8 --wintype=float --position=center --autoclose=1<CR>",
   { noremap = true, silent = true }
 )
-keymap("n", "<C-\\>", ":FloatermToggle<CR>", { noremap = true, silent = true })
-keymap("t", "<C-\\>", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
-keymap("n", "<M-d>", ":FloatermNext<CR>", { noremap = true, silent = true })
-keymap("t", "<M-d>", "<C-\\><C-n>:FloatermNext<CR>", { noremap = true, silent = true })
-keymap("n", "<M-u>", ":FloatermPrev<CR>", { noremap = true, silent = true })
-keymap("t", "<M-u>", "<C-\\><C-n>:FloatermPrev<CR>", { noremap = true, silent = true })
+keymap("n", "<C-\\>", ":FloatermToggle<CR>", opts)
+keymap("t", "<C-\\>", "<C-\\><C-n>:FloatermToggle<CR>", opts)
+keymap("n", "<M-d>", ":FloatermNext<CR>", opts)
+keymap("t", "<M-d>", "<C-\\><C-n>:FloatermNext<CR>", opts)
+keymap("n", "<M-u>", ":FloatermPrev<CR>", opts)
+keymap("t", "<M-u>", "<C-\\><C-n>:FloatermPrev<CR>", opts)
+
+keymap(
+  "n",
+  "<leader>tn",
+  ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Node --position=center --autoclose=1 node<CR>",
+  opts
+)
+keymap(
+  "n",
+  "<leader>tu",
+  ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=NCDU --position=center --autoclose=1 ncdu<CR>",
+  opts
+)
+keymap(
+  "n",
+  "<leader>tp",
+  ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Python --position=center --autoclose=1 python<CR>",
+  opts
+)
+keymap(
+  "n",
+  "<leader>tt",
+  ":FloatermNew --width=0.8 --height=0.9 --wintype=float --name=Htop --position=center --autoclose=1 htop<CR>",
+  opts
+)
+keymap(
+  "n",
+  "<leader>tc",
+  ":FloatermNew --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+  opts
+)
+-- ":FloatermToggle --width=0.8 --height=0.8 --wintype=float --name=Float --position=center --autoclose=1<CR>",
+keymap("n", "<leader>tT", ":FloatermToggle --autoclose=1<CR>", opts)
+keymap(
+  "n",
+  "<leader>th",
+  ":FloatermNew --height=0.4 --wintype=split --name=Horizontal --position=botright --autoclose=1<CR>",
+  opts
+)
+keymap(
+  "n",
+  "<leader>tv",
+  ":FloatermNew --width=0.4 --wintype=vsplit --name=Vertical --position=botright --autoclose=1<CR>",
+  opts
+)

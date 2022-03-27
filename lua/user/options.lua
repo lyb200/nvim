@@ -10,7 +10,8 @@ local options = {
   -------------------------------------------------------------------
   mouse = "a", -- allow the mouse to be used in neovim
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-  completeopt = { "menuone", "noselect" }, -- mostly just for cmp
+  completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
+  -- completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   scrolloff = 5, -- is one of my fav
   sidescrolloff = 5,
   conceallevel = 0, -- so that `` is visible in markdown files
@@ -80,7 +81,8 @@ local options = {
   synmaxcol = 240, -- Max column for syntax highlight
   ttimeoutlen = 50,
   lazyredraw = true,
-
+  -- Set grep default grep command with ripgrep
+  grepprg = "rg --vimgrep --follow",
   -------------------------------------------------------------------
   -- File
   -------------------------------------------------------------------
@@ -102,6 +104,7 @@ opt.whichwrap:append "<,>,[,]"
 opt.formatoptions:remove { "c", "r", "o" }
 opt.diffopt:append "vertical" -- show diffs side by side
 opt.matchpairs:append "<:>,«:»"
+opt.errorformat:append "%f:%l:%c%p%m"
 
 -- some terminal need
 vim.cmd [[

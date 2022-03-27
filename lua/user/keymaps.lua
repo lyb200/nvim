@@ -49,11 +49,12 @@ keymap("n", "val", "ggVG", opts)
 -- save and quit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
+
 vim.cmd [[
-" cnoreabbrev Wq wq
-" cnoreabbrev WQ wq
-" cnoreabbrev W w
-" cnoreabbrev Q q
+  cnoreabbrev Wq wq
+  cnoreabbrev WQ wq
+  cnoreabbrev W w
+  cnoreabbrev Q q
 " Git command
   cnoreabbrev git Git
   cnoreabbrev gitd Git diff
@@ -66,10 +67,10 @@ vim.cmd [[
 ]]
 
 -- vim.cmd ":command! WQ wq"  -- useful
-keymap("c", "W", "w", opts)
-keymap("c", "Q", "q", opts)
-keymap("c", "WQ", "wq", opts)
-keymap("c", "WQA", "wqa", opts)
+-- keymap("c", "W", "w", opts)
+-- keymap("c", "Q", "q", opts)
+-- keymap("c", "WQ", "wq", opts)
+-- keymap("c", "WQA", "wqa", opts)
 
 -- Allow saving of files as sudo when I forgot to start vim using sudo.
 keymap("c", "<C-S>", ":<C-u>w !sudo tee > /dev/null %", { noremap = true })
@@ -79,6 +80,10 @@ keymap("n", "/", "/\\v", {})
 -- keymap("v", "/", "/\\v", {})
 keymap("n", "?", "?\\v", {})
 -- keymap("v", "?", "?\\v", {})
+
+-- put selected text in register '/'
+keymap("v", "<leader>y", ":<C-u>GetSelection<CR>gv", opts)
+keymap("v", "<Leader>Y", ":<C-u>GetSelection<CR>:set hlsearch<CR>", opts)
 
 keymap("n", "&", ":&&<CR>", { noremap = true })
 keymap("x", "&", ":&&<CR>", { noremap = true })
@@ -108,8 +113,8 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
@@ -154,7 +159,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Custom
 keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<TAB>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-keymap("n", "sq", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "sc", "<cmd>Bdelete!<CR>", opts)
 -- keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
 keymap("n", "<F3>", ":e .<cr>", opts)
 keymap("n", "<F4>", "<cmd>Telescope resume<cr>", opts)
@@ -217,7 +222,7 @@ vim.cmd [[
       exec "!time ./%<"
     elseif &filetype == 'cpp'
       exec "!g++ -std=c++11 % -Wall -o %<"
-      :FloatermNew ./%<
+      :FloatermNew --height=0.4 --wintype=split --position=botright ./%<
       " set splitbelow
       " :spilt
       " :resize -15
@@ -228,7 +233,7 @@ vim.cmd [[
     elseif &filetype == 'sh'
       :!time bash %
     elseif &filetype == 'python'
-      :FloatermNew python %
+      :FloatermNew --height=0.4 --wintype=split --position=botright python %
       " set splitbelow
       " :sp
       " :term python %
@@ -243,20 +248,20 @@ vim.cmd [[
       exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
       silent! exec "CocCommand flutter.dev.openDevLog"
     elseif &filetype == 'javascript'
-      :FloatermNew export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+      :FloatermNew --height=0.4 --wintype=split --position=botright export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
       " set splitbelow
       " :sp
       " :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
     elseif &filetype == 'go'
-      :FloatermNew go run .
+      :FloatermNew --height=0.4 --wintype=split --position=botright go run .
       " set splitbelow
       " :sp
       " :term go run .
     elseif &filetype == 'lua'
       if has('unix')
-        :FloatermNew lua %
+        :FloatermNew --height=0.4 --wintype=split --position=botright lua %
       else
-        :FloatermNew c:\lua_bin/lua54 %
+        :FloatermNew --height=0.4 --wintype=split --position=botright c:\lua_bin/lua54 %
       endif
     endif
   endfunc

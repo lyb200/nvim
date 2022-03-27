@@ -45,6 +45,12 @@ vim.cmd [[
   " Control input Method
   autocmd! InsertLeave * set imdisable
   autocmd! InsertEnter * set noimdisable
+
+  " markdown filetype buffer imap
+  augroup comma_mapkeys
+    autocmd! * <buffer>
+    autocmd filetype markdown :lua comma_which_key()
+  augroup END
 ]]
 -- autocmd BufLeave * if (!exists('b:caret')) | let b:caret = winsaveview() | endif
 -- autocmd BufEnter * if (exists('b:caret')) | call winrestview(b:caret) | endif
