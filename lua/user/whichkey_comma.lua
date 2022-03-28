@@ -20,17 +20,6 @@ _G.comma_which_key = function()
     [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "find->edit<++>" },
   }
 
-  -- local c_vopts = { -- comma
-  --   mode = "v", -- VISUAL mode
-  --   prefix = ",",
-  --   buffer = bufnr, -- Global mappings. Specify a buffer number for buffer local mappings
-  --   silent = false, -- use `silent` when creating keymaps
-  --   noremap = true, -- use `noremap` when creating keymaps
-  --   nowait = true, -- use `nowait` when creating keymaps
-  -- }
-  --
-  -- local c_vmappings = {}
-  --
   local c_iopts = { -- comma
     mode = "i", -- Insert mode
     prefix = ",",
@@ -56,12 +45,24 @@ _G.comma_which_key = function()
     p = { "![](<++>) <++><Esc>F[a", "picture ![](<++>)" },
     a = { "[](<++>) <++><Esc>F[a", "link [](<++>" },
     m = { "@[TOC](Menu) <++><Esc>F(a", "Menu [TOC]" },
-    ["1"] = { "#<Space><CR><++><Esc>kA", "heading1" },
-    ["2"] = { "##<Space><CR><++><Esc>kA", "heading2" },
-    ["3"] = { "###<Space><CR><++><Esc>kA", "heading3" },
-    ["4"] = { "####<Space><CR><++><Esc>kA", "heading4" },
+    ["1"] = { "#<Space><CR><CR><++><Esc>kA", "heading1" },
+    ["2"] = { "##<Space><CR><CR><++><Esc>kA", "heading2" },
+    ["3"] = { "###<Space><CR><CR><++><Esc>kA", "heading3" },
+    ["4"] = { "####<Space><CR><CR><++><Esc>kA", "heading4" },
   }
 
   which_key.register(c_mappings, c_opts)
   which_key.register(c_imappings, c_iopts)
 end
+
+-- local c_vopts = { -- comma
+--   mode = "v", -- VISUAL mode
+--   prefix = ",",
+--   buffer = bufnr, -- Global mappings. Specify a buffer number for buffer local mappings
+--   silent = false, -- use `silent` when creating keymaps
+--   noremap = true, -- use `noremap` when creating keymaps
+--   nowait = true, -- use `nowait` when creating keymaps
+-- }
+--
+-- local c_vmappings = {}
+--
