@@ -5,7 +5,7 @@ vim.cmd [[
     "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
     autocmd!
     autocmd Filetype markdown inoremap <buffer><silent> ,; <Esc>/<++><CR>:nohlsearch<CR>"_c4l
-    autocmd Filetype markdown inoremap <buffer><silent> ,, <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
+    autocmd Filetype markdown inoremap <buffer><silent> ,/ <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
     autocmd Filetype markdown inoremap <buffer><silent> ,n ---<CR><CR>
     autocmd Filetype markdown inoremap <buffer><silent> ,o **** <++><Esc>2F*i
     autocmd Filetype markdown inoremap <buffer><silent> ,s ~~~~ <++><Esc>2F~i

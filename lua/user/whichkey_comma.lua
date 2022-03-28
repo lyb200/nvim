@@ -42,7 +42,8 @@ _G.comma_which_key = function()
 
   local c_imappings = {
     [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "/<++> insert" },
-    [","] = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "/  <++> insert" },
+    ["/"] = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "/  <++> insert" },
+    [" "] = { "do nothing" },
     l = { "--------<CR>", "line ------" },
     n = { "---<CR><CR>", "line ---<CR><CR>" },
     o = { "**** <++><Esc>2F*i", "bold ****" },
