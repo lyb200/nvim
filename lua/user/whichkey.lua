@@ -139,7 +139,7 @@ local mappings = {
     p = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
     w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
     f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
-    u = { ":call CompileRunGcc()<CR>", "run code" },
+    u = { "<cmd>lua require('user.functions').CompileRunGcc()<CR>", "run code" },
     a = { ":RnvimrToggle<CR>", "Ranger<M-r>|<M-s>" },
     n = { "<cmd>lua require('renamer').rename({empty = true})<cr>", "Rename" },
   },

@@ -177,3 +177,57 @@ opt.undodir = "$HOME/tmp/undo"
      opt.undodir = "$HOME/AppData/Local/nvim-data/undo"
 end
 end
+
+```vim
+vim.cmd [[--   func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+      exec "!g++ % -o %<"
+      exec "!time ./%<"
+    elseif &filetype == 'cpp'
+      exec "!g++ -std=c++11 % -Wall -o %<"
+      :FloatermNew --height=0.4 --wintype=split --position=botright ./%<
+      " set splitbelow
+      " :spilt
+      " :resize -15
+      " :term ./%<
+    elseif &filetype == 'java'
+      exec "!javac %"
+      exec "!time java %<"
+    elseif &filetype == 'sh'
+      :!time bash %
+    elseif &filetype == 'python'
+      :FloatermNew --height=0.4 --wintype=split --position=botright python %
+      " set splitbelow
+      " :sp
+      " :term python %
+    elseif &filetype == 'html'
+      silent! exec "!".g:mkdp_browser." % &"
+    elseif &filetype == 'markdown'
+      exec ":MarkdownPreview"
+    elseif &filetype == 'tex'
+      silent! exec "VimtexStop"
+      silent! exec "VimtexCompile"
+    elseif &filetype == 'dart'
+      exec "CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args
+      silent! exec "CocCommand flutter.dev.openDevLog"
+    elseif &filetype == 'javascript'
+      :FloatermNew --height=0.4 --wintype=split --position=botright export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+      " set splitbelow
+      " :sp
+      " :term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
+    elseif &filetype == 'go'
+      :FloatermNew --height=0.4 --wintype=split --position=botright go run .
+      " set splitbelow
+      " :sp
+      " :term go run .
+    elseif &filetype == 'lua'
+      if has('unix')
+        :FloatermNew --height=0.4 --wintype=split --position=botright lua %
+      else
+        :FloatermNew --height=0.4 --wintype=split --position=botright c:\lua_bin/lua54 %
+      endif
+    endif
+  endfunc
+]]
+```
