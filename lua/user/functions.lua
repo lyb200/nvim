@@ -119,17 +119,18 @@ M.CompileRunGcc = function()
   elseif filetype == "python" then
     vim.cmd [[ FloatermNew --height=0.4 --wintype=split --position=botright python % ]]
   elseif filetype == "html" then
-    vim.cmd [[silent! exec '"!" .. g.mkdp_browser .. " % &"' ]]
+    vim.cmd [[silent! exec "!" . g:mkdp_browser . " % &" ]]
   elseif filetype == "markdown" then
-    vim.cmd [[ exec ":MarkdownPreview" ]]
+    vim.cmd [[ exec "MarkdownPreview" ]]
   elseif filetype == "tex" then
     vim.cmd [[
       silent! exec "VimtexStop"
       silent! exec "VimtexCompile"
     ]]
   elseif filetype == "dart" then
+    -- can't execute, No CocCommand, here
     vim.cmd [[
-      exec "CocCommand flutter.run -d " .. vim.g.flutter_default_device .. " " .. vim.g.flutter_run_args
+      exec "CocCommand flutter.run -d " . g:flutter_default_device . " " . g:flutter_run_args
       silent! exec "CocCommand flutter.dev.openDevLog"
     ]]
   elseif filetype == "javascript" then
