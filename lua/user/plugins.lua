@@ -52,7 +52,7 @@ return packer.startup(function(use)
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim" -- status
   -- terminal toggle
-  -- use { "akinsho/toggleterm.nvim" }
+  use { "akinsho/toggleterm.nvim" }
   -- Terminal manager for (neo)vim
   use {
     "voldikss/vim-floaterm",

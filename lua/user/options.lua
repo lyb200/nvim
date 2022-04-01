@@ -142,6 +142,8 @@ vim.g.loaded_python_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.perl_host_prog = "/usr/bin/perl"
+-- highlight support embedded lua, python and js
+vim.g.vimsyn_embed = "lpj"
 
 -- :options can list all configures
 -- :h option-list can get help.
