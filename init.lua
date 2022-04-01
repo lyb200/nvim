@@ -46,7 +46,7 @@ require "user.gps"
 require "user.illuminate"
 require "user.translator"
 require "user.markdown" -- none code, some cmd hint
--- require "user.toggleterm"
+require "user.toggleterm"
 require "user.floaterm"
 require "user.rnvimr"
 
