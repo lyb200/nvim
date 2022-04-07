@@ -29,6 +29,12 @@ if not status_ok then
   return
 end
 
+-- my config for window
+local run_cmd = "./install.sh"
+if vim.fn.has "win32" == 1 then
+  run_cmd = "powershell ./install.ps1"
+end
+
 -- Have packer use a popup window
 packer.init {
   display = {
@@ -159,7 +165,9 @@ return packer.startup(function(use)
         sort = true,
       }
     end,
-    run = "./install.sh",
+    -- run = "./install.sh",
+    run = run_cmd, -- different in window or linux
+    -- after = "nvim-cmp", -- for window, linux don't need
     requires = "hrsh7th/nvim-cmp",
   }
   -- use 'David-Kunz/cmp-npm' -- doesn't seem to work
