@@ -262,6 +262,8 @@ local L_brackey_vmappings = {
   S = { "like [s, but search backwards" },
   z = { "start of cur_open_fold" },
   d = { "Buffer prev diagnostics" },
+  ["["] = { "sections backward|next { in 1st col" },
+  ["]"] = { "sections backward|next } in 1st col" },
 }
 
 local R_bracket_vopts = {
@@ -280,6 +282,8 @@ local R_brackey_vmappings = {
   S = { "like ]s, stop at bad words" },
   z = { "end of cur_open_fold" },
   d = { "Buffer next diagnostics" },
+  ["["] = { "sections forward|next { in 1st col" },
+  ["]"] = { "sections forward|next } in 1st col" },
 }
 
 -- which_key.setup(setup)
