@@ -106,8 +106,8 @@ local g_mappings = {
   r = { "Buffer references" },
   s = { "Buffer show diagnostic" },
   l = { "Buffer list diagnostics" },
-  [","] = { "Buffer prev diagnostics" },
-  [";"] = { "Buffer next diagnostics" },
+  -- [","] = { "Buffer prev diagnostics" },
+  -- [";"] = { "Buffer next diagnostics" },
 }
 
 local g_vopts = { -- comma
@@ -245,6 +245,43 @@ local backslash_vmappings = {
   s = { ":s/\\v/g<left><left>", "substitute" },
 }
 
+local L_bracket_vopts = {
+  mode = "n", -- VISUAL mode
+  prefix = "[",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local L_brackey_vmappings = {
+  c = { "prev_start_change_diffs" },
+  i = { "1st_line_contain_keyword_in_file" },
+  I = { "all_lines_contain_keyword_in_file" },
+  p = { "like p, adjust indent to curline" },
+  S = { "like [s, but search backwards" },
+  z = { "start of cur_open_fold" },
+  d = { "Buffer prev diagnostics" },
+}
+
+local R_bracket_vopts = {
+  mode = "n", -- VISUAL mode
+  prefix = "]",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local R_brackey_vmappings = {
+  c = { "next_start_change_diffs_after" },
+  i = { "1st_line_contain_keyword_after" },
+  I = { "all_lines_contain_keyword_after" },
+  S = { "like ]s, stop at bad words" },
+  z = { "end of cur_open_fold" },
+  d = { "Buffer next diagnostics" },
+}
+
 -- which_key.setup(setup)
 which_key.register(s_mappings, s_opts)
 which_key.register(s_vmappings, s_vopts)
@@ -255,3 +292,5 @@ which_key.register(d_mappings, d_opts)
 which_key.register(y_mappings, y_opts)
 which_key.register(backslash_mappings, backslash_opts)
 which_key.register(backslash_vmappings, backslash_vopts)
+which_key.register(L_brackey_vmappings, L_bracket_vopts)
+which_key.register(R_brackey_vmappings, R_bracket_vopts)
