@@ -17,7 +17,7 @@ _G.comma_which_key = function()
   }
 
   local c_mappings = {
-    [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "find->edit<++>" },
+    [";"] = { '<Esc>/<++><CR>:nohlsearch<CR>"_c4l', "find->edit<++>" },
   }
 
   local c_iopts = { -- comma
@@ -30,8 +30,8 @@ _G.comma_which_key = function()
   }
 
   local c_imappings = {
-    [";"] = { "<Esc>/<++><CR>:nohlsearch<CR>c4l", "/<++> insert" },
-    ["/"] = { "<Esc>/ <++><CR>:nohlsearch<CR>c5l", "/  <++> insert" },
+    [";"] = { '<Esc>/<++><CR>:nohlsearch<CR>"_c4l', "/<++> insert" },
+    ["/"] = { '<Esc>/ <++><CR>:nohlsearch<CR>"_c5l', "/  <++> insert" },
     [" "] = { "do nothing" },
     l = { "--------<CR>", "line ------" },
     n = { "---<CR><CR>", "line ---<CR><CR>" },

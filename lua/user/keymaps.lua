@@ -102,6 +102,10 @@ keymap("i", "<C-K>", "<UP>", opts)
 keymap("i", "<C-J>", "<Down>", opts)
 keymap("i", "<C-H>", "<Left>", opts)
 keymap("i", "<C-L>", "<Right>", opts)
+-- make keymap undo-friendly
+keymap("i", "<C-u>", "<C-g>u<C-u>", opts)
+keymap("i", "<C-w>", "<C-g>u<C-w>", opts)
+
 -- make :lmap and IM turn off automatically when leaving Insert mode.
 keymap("i", "<Esc>", "<ESC>:set iminsert=0 imsearch=0<CR>", opts)
 
