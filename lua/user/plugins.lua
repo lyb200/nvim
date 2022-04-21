@@ -113,7 +113,9 @@ return packer.startup(function(use)
   use "tversteeg/registers.nvim"
   -- use "metakirby5/codi.vim"
   use "nyngwang/NeoZoom.lua"
+  -- 状态栏组件，用于显示光所处的位置
   use "SmiteshP/nvim-gps"
+  -- 运行片段代码
   use { "michaelb/sniprun", run = "bash ./install.sh" }
   use {
 

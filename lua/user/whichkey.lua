@@ -242,7 +242,7 @@ local mappings = {
     b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Brackets" },
   }, ]]
 
-  S = {
+  s = {
     -- name = "Session",
     -- s = { "<cmd>SaveSession<cr>", "Save" },
     -- l = { "<cmd>LoadLastSession!<cr>", "Load Last" },
