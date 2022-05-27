@@ -34,7 +34,8 @@ require "user.git-blame"
 require "user.gist"
 require "user.gitlinker"
 require "user.session-manager"
--- require "user.surround"  -- use plugin tpope/vim-surround
+-- require "user.surround"
+-- use plugin tpope/vim-surround
 require "user.notify"
 require "user.ts-context"
 require "user.registers"
