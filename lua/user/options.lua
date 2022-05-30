@@ -97,6 +97,10 @@ for k, v in pairs(options) do
   opt[k] = v
 end
 
+vim.g.loaded_netrw = 1
+vim.g.loade_netrwPlugin = 1
+opt.fillchars.eob=" "
+
 -- Don't pass message to ins-completion-menu
 opt.shortmess:append "c"
 opt.iskeyword:append "-"
@@ -106,6 +110,12 @@ opt.formatoptions:remove { "c", "r", "o" }
 opt.diffopt:append "vertical" -- show diffs side by side
 opt.matchpairs:append "<:>,«:»"
 opt.errorformat:append "%f:%l:%c%p%m"
+
+vim.filetype.add({
+  extension = {
+    conf = "dosini",
+  },
+})
 
 -- some terminal need
 vim.cmd [[

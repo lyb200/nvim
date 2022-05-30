@@ -1,5 +1,7 @@
 local M = {}
 
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
 M.setup = function()
   local icons = require "user.icons"
   local signs = {
@@ -46,13 +48,13 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  -- if client.resolved_capabilities.document_highlight then
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then
       return
     end
     illuminate.on_attach(client)
-  end
+  -- end
 end
 
 local function lsp_keymaps(bufnr)
@@ -84,38 +86,27 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
-  -- notify(client.name)
-  if client.name == "tsserver" or client.name == "html" then
-    client.resolved_capabilities.document_formatting = false
+  -- vim.notify(client.name .. " starting...")
+  -- TODO: refactor this into a method that checks if string in list
+
+  if client.name == "jdt.ls" then
+    require("jdtls").setup_dap { hotcodereplace = "auto" }
+    require("jdtls.dap").setup_dap_main_class_configs()
+    M.capabilities.textDocument.completion.completionItem.snippetSupport = false
+    vim.lsp.codelens.refresh()
+  else
+    local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    if not status_cmp_ok then
+      return
+    end
+
+    M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+    M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
   end
+
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- NOTE: my config below
-capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
-end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 function M.enable_format_on_save()
   vim.cmd [[

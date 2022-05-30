@@ -142,8 +142,6 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":move .+1<CR>==", opts)
 keymap("v", "<A-k>", ":move .-2<CR>==", opts)
-keymap("v", "<A-j>", ":move .+1<CR>==", opts)
-keymap("v", "<A-k>", ":move .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
@@ -199,6 +197,9 @@ keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 -- Change '<CR>' to whatever shortcut you like :)
 keymap("n", "<CR>", "<cmd>NeoZoomToggle<CR>", { noremap = true, silent = true, nowait = true })
+
+keymap("n", "-", ":lua require'lir.float'.toggle()<cr>", opts)
+keymap("n", "=", "<cmd>JABSOpen<CR>", { noremap = true, silent = true, nowait = true })
 
 keymap("n", "<space>a", "<cmd>Alpha<cr>", opts)
 keymap("n", "<space>e", "<cmd>NvimTreeToggle<cr>", opts)

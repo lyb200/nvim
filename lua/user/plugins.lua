@@ -55,7 +55,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   use {
     "kyazdani42/nvim-tree.lua",
-    commit = "f183c7f31197ae499c3420341fb8b275636a49b8",
+    -- commit = "f183c7f31197ae499c3420341fb8b275636a49b8",
   }
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
@@ -95,37 +95,46 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
-  use { "phaazon/hop.nvim" } -- any jump
+  use "phaazon/hop.nvim"  -- any jump
   use "andymass/vim-matchup"
   use "nacro90/numb.nvim"
   use "monaqa/dial.nvim"
   use "norcalli/nvim-colorizer.lua"
   use "windwp/nvim-spectre"
-  use { "folke/zen-mode.nvim" }
+  use "folke/zen-mode.nvim"
   use "karb94/neoscroll.nvim"
-  use { "folke/todo-comments.nvim" }
+  use "folke/todo-comments.nvim"
   use "kevinhwang91/nvim-bqf"
   use "ThePrimeagen/harpoon"
-  use { "MattesGroeger/vim-bookmarks" }
-  use "lunarvim/vim-solidity"
+  use "MattesGroeger/vim-bookmarks"
+  -- use "lunarvim/vim-solidity"
   use "tpope/vim-surround"
   -- use "ur4ltz/surround.nvim"
   use "tpope/vim-repeat"
-  use { "Shatur/neovim-session-manager" }
+  -- use "Shatur/neovim-session-manager"
   use "rcarriga/nvim-notify"
   use "tversteeg/registers.nvim"
   -- use "metakirby5/codi.vim"
-  use "nyngwang/NeoZoom.lua"
+  use { "nyngwang/NeoZoom.lua", branch = "neo-zoom-original" }
   -- 状态栏组件，用于显示光所处的位置
-  use "SmiteshP/nvim-gps"
+  use { "christianchiarulli/nvim-gps", branch = "text_hl" }
   -- 运行片段代码
   use { "michaelb/sniprun", run = "bash ./install.sh" }
   use {
-
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = "markdown",
     cmd = "MarkdownPreview",
+  }
+  use {
+    "christianchiarulli/JABS.nvim",
+    requires = { "kyazdani42/nvim-web-devicons" }, -- optional
+  }
+  use {
+    "ghillb/cybu.nvim",
+    branch = "v1.x", -- won't receive breaking  changes
+    -- branch = "main", -- timely updates
+    requires = { "kyazdani42/nvim-web-devicons" }, -- optional
   }
   use {
     "dhruvasagar/vim-table-mode",
@@ -144,7 +153,7 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use "folke/tokyonight.nvim"
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  -- use "lunarvim/darkplus.nvim"
+  use "lunarvim/darkplus.nvim"
   -- use "rose-pine/neovim"
   -- use "rebelot/kanagawa.nvim"
   use "ajmwagar/vim-deus" -- my favorite colorsche
@@ -154,7 +163,7 @@ return packer.startup(function(use)
   -- cmp plugins
   use { -- The completion plugin
     "hrsh7th/nvim-cmp",
-    commit = "d93104244c3834fbd8f3dd01da9729920e0b5fe7",
+    -- commit = "d93104244c3834fbd8f3dd01da9729920e0b5fe7",
   }
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
@@ -163,6 +172,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-emoji"
   use "hrsh7th/cmp-nvim-lua"
+  use "rcarriga/cmp-dap"
   use {
     "tzachar/cmp-tabnine",
     config = function()
@@ -171,6 +181,12 @@ return packer.startup(function(use)
         max_lines = 1000,
         max_num_results = 20,
         sort = true,
+	run_on_every_keystroke = true,
+	snippet_placeholder = "..",
+	ignore_file_types = { -- default is not ignore
+	  -- uncomment to ignore in lua:
+	  -- lua = ture
+	}
       }
     end,
     -- run = "./install.sh",

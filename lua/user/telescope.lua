@@ -28,12 +28,14 @@ telescope.setup {
         ["<Up>"] = actions.move_selection_previous,
 
         ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
+        ["<C-s>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
 
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
+        ['<c-d>'] = require('telescope.actions').delete_buffer,
+
+        -- ["<C-u>"] = actions.preview_scrolling_up,
+        -- ["<C-d>"] = actions.preview_scrolling_down,
 
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
@@ -47,7 +49,7 @@ telescope.setup {
       },
 
       n = {
-        ["<ESC>"] = actions.close,
+        ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
@@ -110,14 +112,14 @@ telescope.setup {
         },
       },
     },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-        previewer = false,
-        -- even more opts
-      },
-    },
+    -- ["ui-select"] = {
+    --   require("telescope.themes").get_dropdown {
+    --     previewer = false,
+    --     -- even more opts
+    --   },
+    -- },
   },
 }
 
-telescope.load_extension "ui-select"
+-- telescope.load_extension "ui-select"
 telescope.load_extension "file_browser"

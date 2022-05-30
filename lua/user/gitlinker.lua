@@ -7,10 +7,8 @@ gitlinker.setup {
   opts = {
     callbacks = {
       ["git.comcast.com"] = require("gitlinker.hosts").get_github_type_url,
-      -- ["github.com"] = require"gitlinker.hosts".get_github_type_url,
     },
     -- remote = 'github', -- force the use of a specific remote
-    remote = nil, -- force the use of a specific remote
     -- adds current line nr in the url for normal mode
     add_current_line_on_normal_mode = true,
     -- callback for what to do with the url
