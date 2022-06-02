@@ -25,7 +25,6 @@ local options = {
   foldenable = true,
   visualbell = true,                               -- use visual bell instead of beeping
   virtualedit = "block",                           -- allow virtual editing in Visual block mode
-  spell = false,                                   -- no spell checking
   -------------------------------------------------------------------
   -- Neovim UI
   -------------------------------------------------------------------
