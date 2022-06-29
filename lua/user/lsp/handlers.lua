@@ -1,6 +1,7 @@
 local M = {}
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.offsetEncoding = {"utf-16"}
 
 M.setup = function()
   local icons = require "user.icons"
