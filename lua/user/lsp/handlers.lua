@@ -78,7 +78,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gs", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   -- keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
 end
 
 -- local notify_status_ok, notify = pcall(require, "notify")
