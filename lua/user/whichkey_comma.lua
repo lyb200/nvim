@@ -40,8 +40,8 @@ _G.comma_which_key = function()
     i = { "** <++><Esc>F*i", "italic **" },
     c = { "`` <++><Esc>F`i", "Inline code ``" },
     b = { "```<CR><++><CR>```<CR><CR><++><Esc>4kA", "block code ``````" },
-    t = { "- [ ] ", "TODO - [ ]" },
-    d = { "- [x] ", "Done - [x]" },
+    T = { "- [ ] ", "TODO - [ ]" },
+    D = { "- [x] ", "Done - [x]" },
     p = { "![](<++>) <++><Esc>F[a", "picture ![](<++>)" },
     a = { "[](<++>) <++><Esc>F[a", "link [](<++>" },
     m = { "@[TOC](Menu) <++><Esc>F(a", "Menu [TOC]" },
@@ -49,6 +49,11 @@ _G.comma_which_key = function()
     ["2"] = { "##<Space><CR><CR><++><Esc>2kA", "heading2" },
     ["3"] = { "###<Space><CR><CR><++><Esc>2kA", "heading3" },
     ["4"] = { "####<Space><CR><CR><++><Esc>2kA", "heading4" },
+    t = {
+      ["2"] = { "| <++> | <++> |<CR>|---|---|<CR>| <++> | <++> |<ESC>", "table 2 cols"},
+      ["3"] = { "| <++> | <++> | <++> |<CR>|---|---|---|<CR>| <++> | <++> | <++> |<ESC>", "table 3 cols"},
+    },
+    h = { "<++>", "placeholder"},
   }
 
   which_key.register(c_mappings, c_opts)
