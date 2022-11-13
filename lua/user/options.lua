@@ -87,7 +87,9 @@ local options = {
   -- File
   -------------------------------------------------------------------
   backup = false,                                  -- creates a backup file
-  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  -- if a file is being edited by another program (or was written to file while editing with another program),
+  -- it is not allowed to be edited
+  writebackup = false,
   undofile = true,                                 -- enable persistent undo
   swapfile = false,                                -- creates a swapfile
 }
@@ -154,7 +156,8 @@ if vim.fn.has "unix" == 1 then
   vim.g.python3_host_prog = "/usr/bin/python3"
   vim.g.perl_host_prog = "/usr/bin/perl"
 else
-  vim.g.python3_host_prog = "c:/python310/python3"
+  --[[ vim.g.python3_host_prog = "c:/python310/python3" ]]
+  vim.g.python3_host_prog = "c:/python3/python"
 end
 -- highlight support embedded lua, python and js
 vim.g.vimsyn_embed = "lpj"
