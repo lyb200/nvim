@@ -182,12 +182,12 @@ return packer.startup(function(use)
         max_lines = 1000,
         max_num_results = 20,
         sort = true,
-	run_on_every_keystroke = true,
-	snippet_placeholder = "..",
-	ignore_file_types = { -- default is not ignore
-	  -- uncomment to ignore in lua:
-	  -- lua = ture
-	}
+        run_on_every_keystroke = true,
+        snippet_placeholder = "..",
+        ignore_file_types = { -- default is not ignore
+          -- uncomment to ignore in lua:
+          -- lua = ture
+        }
       }
     end,
     -- run = "./install.sh",
