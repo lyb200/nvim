@@ -143,10 +143,10 @@ end -- TODO: in linux, keywordprg=:Man, does't work
 if has "linebreak" then
   opt.linebreak = true
   --⤷(U+2937)
-  opt.showbreak = "⤷"
-  if fn.empty "breakindentopt" == 1 then
-    opt.breakindentopt = "shift:2"
-  end
+  --[[ opt.showbreak = "⤷" ]]
+  --[[ if fn.empty "breakindentopt" == 1 then ]]
+  --[[   opt.breakindentopt = "shift:2" ]]
+  --[[ end ]]
 end
 
 vim.g.loaded_perl_provider = 0
