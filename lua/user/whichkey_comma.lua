@@ -43,6 +43,7 @@ _G.comma_which_key = function()
     T = { "- [ ] ", "TODO - [ ]" },
     D = { "- [x] ", "Done - [x]" },
     p = { "![](<++>) <++><Esc>F[a", "picture ![](<++>)" },
+    P = { "<div align='center'><img src='./' alt='<++>' width='<++>' hight='<++>'></div><Esc>Fa2hi", "picture center" },
     a = { "[](<++>) <++><Esc>F[a", "link [](<++>" },
     m = { "@[TOC](目录) <++><Esc>F(a", "Menu [TOC]" },
     ["1"] = { "#<Space><CR><CR><++><Esc>2kA", "heading1" },
