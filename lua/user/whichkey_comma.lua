@@ -43,7 +43,7 @@ _G.comma_which_key = function()
     T = { "- [ ] ", "TODO - [ ]" },
     D = { "- [x] ", "Done - [x]" },
     P = { "![](<++>) <++><Esc>F[a", "picture ![](<++>)" },
-    p = { "<div align='center'><img src='../img/' alt='<++>' width='450' height='<++>'></div><Esc>Fa3h", "picture center" },
+    p = { "<div align='center'><img src='../img/' alt='<++>' width='<++>' height='<++>'></div><Esc>Fa3h", "picture center" },
     e = { "<p align='center'></p><Esc>F<h", "text center" },
     E = { "<div align='center'><font size='7'></font></div><Esc>2F<i", "Head center" },
     a = { "[](<++>) <++><Esc>F[a", "link [](<++>" },
@@ -52,6 +52,8 @@ _G.comma_which_key = function()
     ["2"] = { "##<Space><CR><CR><++><Esc>2kA", "heading2" },
     ["3"] = { "###<Space><CR><CR><++><Esc>2kA", "heading3" },
     ["4"] = { "####<Space><CR><CR><++><Esc>2kA", "heading4" },
+    ["5"] = { "#####<Space><CR><CR><++><Esc>2kA", "heading5" },
+    ["6"] = { "######<Space><CR><CR><++><Esc>2kA", "heading6" },
     t = {
       ["2"] = { "| <++> | <center><++></center> |<CR>| ---  | :---  |<CR>| <++> | <++> |<ESC>yy10p3k", "table 2 cols"},
       ["3"] = { "| <++> | <++> | <++> |<CR>| ---  | ---  | ---  |<CR>| <++> | <++> | <++> |<ESC>yy10p3k", "table 3 cols"},
