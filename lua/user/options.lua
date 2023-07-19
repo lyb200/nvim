@@ -164,3 +164,4 @@ vim.g.vimsyn_embed = "lpj"
 
 -- :options can list all configures
 -- :h option-list can get help.
+-- :notifications can list some warning.
