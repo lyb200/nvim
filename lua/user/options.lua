@@ -61,7 +61,8 @@ local options = {
   pumheight = 10,                                  -- pop up menu height
   termguicolors = true,                            -- set term gui colors (most terminals support this)
   -- guifont = "monospace:h17",                    -- the font used in graphical neovim applications
-  guifont = "agave Nerd Font:h14:cANSI:qDRAFT",    -- the font used in graphical neovim applications
+  -- guifont = "agave Nerd Font:h14:cANSI:qDRAFT",    -- the font used in graphical neovim applications
+  guifont = "agave Nerd Font:h14",    -- the font used in graphical neovim applications
 
   -------------------------------------------------------------------
   -- Tabs, indent
