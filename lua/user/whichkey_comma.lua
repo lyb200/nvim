@@ -46,7 +46,7 @@ _G.comma_which_key = function()
     n = { "---<CR><CR>", "line ---<CR><CR>" },
     o = { "**** <++><Esc>2F*i", "bold ****" },
     P = { "![](<++>) <++><Esc>F[a", "picture ![](<++>)" },
-    p = { "<div align='center'><img src='../img/' alt='<++>' width='<++>' height='<++>'></div><Esc>Fa3h", "picture center" },
+    p = { "<div align='center'><img src='../img/' alt='<++>' width='<++>' height='<++>'></div><br><Esc>Fa3h", "picture center" },
     s = { "~~~~ <++><Esc>2F~i", "strike ~~~~" },
     T = { "- [ ] ", "TODO - [ ]" },
     ["1"] = { "#<Space><CR><CR><++><Esc>2kA", "heading1" },
